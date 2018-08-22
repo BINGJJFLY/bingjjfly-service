@@ -1,4 +1,4 @@
-package com.wjz.pool;
+package com.wjz.service.objectpool;
 
 import org.apache.commons.pool2.BasePooledObjectFactory;
 import org.apache.commons.pool2.impl.GenericObjectPool;
@@ -15,7 +15,7 @@ import com.wjz.service.exception.ServiceException;
  * </p>
  * 
  * @author iss002
- * @see {@link com.wjz.fastdfs.TrackerServerPool TrackerServerPool}
+ * @see {@link com.wjz.service.fastdfs.TrackerServerPool TrackerServerPool}
  *
  * @param <T>
  *            对象池容纳的对象
@@ -46,7 +46,7 @@ public abstract class GenericObjectPoolAssistant<T> {
 		if (maxTotal > 0) {
 			poolConfig.setMaxTotal(maxTotal);
 		} else {
-			String message = "对象池的最大对象容纳数不能小于0";
+			String message = "对象池的最大对象容纳数不能小于等于0";
 			log.error(message);
 			throw new ServiceException(message);
 		}
