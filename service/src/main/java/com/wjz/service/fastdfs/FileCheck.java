@@ -1,17 +1,25 @@
 package com.wjz.service.fastdfs;
 
-import org.apache.commons.lang3.StringUtils;
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
- * <b>附件类型检查类</b>
+ * <b>附件检查类</b>
  * 
  * @author iss002
  *
  */
 public abstract class FileCheck {
+	
+	private static final Logger log = LoggerFactory.getLogger(FileCheck.class);
 
 	/**
 	 * 路径分隔符
@@ -44,9 +52,18 @@ public abstract class FileCheck {
 	 * 压缩文件类型
 	 */
 	private static final List<String> TYPE_COMPRESS = new ArrayList<>();
+	
+	private static final long K_SIZE = 1024;
+	
+	private static final long M_SIZE = K_SIZE * 1024;
+	
+//	@Value("${max.file.size}")
+//	private static long MAX_FILE_SIZE;
+	private static final long MAX_FILE_SIZE = 20L * M_SIZE;
 
 	// TODO 这些信息写在配置文件中就更好了
 	static {
+//		MAX_FILE_SIZE = MAX_FILE_SIZE * M_SIZE;
 
 		TYPE_IMAGE.add("png");
 		TYPE_IMAGE.add("gif");
@@ -266,5 +283,84 @@ public abstract class FileCheck {
 		}
 		return path;
 	}
-
+	
+	/**
+	 * 获得文件的大小
+	 * @param file 文件实例
+	 * @return
+	 */
+	public static Long getFileSize(File file) {
+		FileInputStream fis = null;
+		FileChannel fileChannel = null;
+		if (file != null && file.exists() && file.isFile()) {
+			try {
+				fis = new FileInputStream(file);
+				fileChannel = fis.getChannel();
+				long fileSize = fileChannel.size();
+				
+				if (log.isDebugEnabled()) {
+					log.debug("文件 [{}] 的大小为 [{}]", file.getName(), fileSize);
+				}
+				return fileSize;
+			} catch (IOException e) {
+				log.error("获得文件 ["+ file.getName() +"] 时异常", e);
+			} finally {
+				if (fileChannel != null) {
+					try {
+						fileChannel.close();
+					} catch (IOException e) {
+						fileChannel = null;
+					}
+				}
+				if (fis != null) {
+					try {
+						fis.close();
+					} catch (IOException e) {
+						fis = null;
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * 获得文件的大小
+	 * @param filePath 文件路径
+	 * @return
+	 */
+	public static Long getFileSize(String filePath) {
+		Long fileSize = null;
+		if (!StringUtils.isEmpty(filePath)) {
+			final File file = new File(filePath);
+			fileSize = getFileSize(file);
+		}
+		return fileSize;
+	}
+	
+	/**
+	 * 校验文件大小是否超过指定文件大小
+	 * @param file 文件实例
+	 * @return
+	 */
+	public static boolean checkFileSize(File file) {
+		Long fileSize = getFileSize(file);
+		if (fileSize != null && fileSize < MAX_FILE_SIZE) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * 校验文件大小是否超过指定文件大小
+	 * @param filePath 文件路径
+	 * @return
+	 */
+	public static boolean checkFileSize(String filePath) {
+		Long fileSize = getFileSize(filePath);
+		if (fileSize != null && fileSize < MAX_FILE_SIZE) {
+			return true;
+		}
+		return false;
+	}
 }
