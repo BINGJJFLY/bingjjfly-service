@@ -1,8 +1,9 @@
 package com.wjz.service.pojo;
 
 import java.util.Date;
+import java.util.List;
 
-public class Person extends BaseBean {
+public class Person extends BaseBean<Person> {
 
 	private static final long serialVersionUID = -8842122460259361832L;
 
@@ -13,7 +14,17 @@ public class Person extends BaseBean {
 	private Date addTime;
 
 	private Double asset;
+	
+	private List<String> list;
 
+	public List<String> getList() {
+		return list;
+	}
+
+	public void setList(List<String> list) {
+		this.list = list;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -53,6 +64,7 @@ public class Person extends BaseBean {
 		result = prime * result + ((addTime == null) ? 0 : addTime.hashCode());
 		result = prime * result + ((asset == null) ? 0 : asset.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((list == null) ? 0 : list.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -62,7 +74,7 @@ public class Person extends BaseBean {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
+		if (!super.equals(obj)) {
 			return false;
 		}
 		if (getClass() != obj.getClass()) {
@@ -90,6 +102,13 @@ public class Person extends BaseBean {
 		} else if (!id.equals(other.id)) {
 			return false;
 		}
+		if (list == null) {
+			if (other.list != null) {
+				return false;
+			}
+		} else if (!list.equals(other.list)) {
+			return false;
+		}
 		if (name == null) {
 			if (other.name != null) {
 				return false;
@@ -98,6 +117,12 @@ public class Person extends BaseBean {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Person [id=" + id + ", name=" + name + ", addTime=" + addTime + ", asset=" + asset + ", list=" + list
+				+ "]";
 	}
 
 }
