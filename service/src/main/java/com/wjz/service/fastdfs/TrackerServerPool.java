@@ -64,11 +64,23 @@ public class TrackerServerPool extends GenericObjectPoolFactory<TrackerServer> {
 	}
 
 	public static int getNumIdle() {
+		if (poolInactive()) {
+			return -1;
+		}
+		
 		return getObjectPool().getNumIdle();
 	}
 
 	public static int getNumActive() {
+		if (poolInactive()) {
+			return -1;
+		}
+		
 		return getObjectPool().getNumActive();
+	}
+	
+	private static boolean poolInactive() {
+		return getObjectPool() == null || getObjectPool().isClosed();
 	}
 
 	public static void clear() throws Exception, UnsupportedOperationException {
