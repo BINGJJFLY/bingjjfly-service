@@ -9,19 +9,20 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.ReflectionUtils;
 
-import javassist.Modifier;
+import com.wjz.service.utils.ReflectUtils;
 
 /**
  * <b>基础bean的类</b>
  * <p>
- * 子类无需复写{@code hashCode}、{@code equals}、{@code toString}方法
+ * {@code Field} 和 {@code Method} 使用了缓存
  * </p>
  * <p>
  * <ol>
- * <li>公共 {@code hashCode}</li>
- * <li>公共 {@code equals}</li>
- * <li>公共 {@code toString}</li>
+ * <li>子类公共 {@code hashCode} 方法</li>
+ * <li>子类公共 {@code equals} 方法</li>
+ * <li>子类公共 {@code toString} 方法</li>
  * </ol>
  * </p>
  * 
@@ -40,19 +41,20 @@ public abstract class BaseBean<T> implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		Class<?> clazz = getClass();
-		Field[] fields = clazz.getDeclaredFields();
-		if (!ArrayUtils.isEmpty(fields)) {
-			try {
+
+		try {
+			Field[] fields = ReflectUtils.getLocalFields(clazz);
+			if (!ArrayUtils.isEmpty(fields)) {
 				for (Field field : fields) {
-					if (!Modifier.isStatic(field.getModifiers())) {
-						field.setAccessible(true);
-						Object fieldValue = field.get(this);
+					if (!ReflectUtils.isStatic(field)) {
+						ReflectionUtils.makeAccessible(field);
+						Object fieldValue = ReflectionUtils.getField(field, this);
 						result = prime * result + ((fieldValue == null) ? 0 : fieldValue.hashCode());
 					}
 				}
-			} catch (Exception e) {
-				log.error("获得对象 [" + clazz.getName() + "] 的哈希值时异常", e);
 			}
+		} catch (Exception e) {
+			log.error("获得对象 [" + clazz.getName() + "] 的哈希值时异常", e);
 		}
 
 		return result;
@@ -73,15 +75,16 @@ public abstract class BaseBean<T> implements Serializable {
 		}
 
 		T other = (T) obj;
-		Method[] methods = clazz.getDeclaredMethods();
 		try {
+			Method[] methods = ReflectUtils.getLocalMethods(clazz);
 			if (!ArrayUtils.isEmpty(methods)) {
 				for (Method method : methods) {
 					String methodName = method.getName();
 					if ((methodName.startsWith("get") && methodName.length() > 3)
 							|| (methodName.startsWith("is") && methodName.length() > 2)) {
-						Object thisVal = method.invoke(this);
-						Object otherVal = method.invoke(other);
+						ReflectionUtils.makeAccessible(method);
+						Object thisVal = ReflectionUtils.invokeMethod(method, this);
+						Object otherVal = ReflectionUtils.invokeMethod(method, other);
 						if (thisVal == null) {
 							if (otherVal != null) {
 								return false;
