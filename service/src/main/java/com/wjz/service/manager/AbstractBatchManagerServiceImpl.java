@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.wjz.service.cache.AbstractCacheServiceImpl;
-import com.wjz.service.context.ApplicationContext;
+import com.wjz.service.context.ApplicationContextHolder;
 import com.wjz.service.exception.UnAssignableException;
 import com.wjz.service.utils.ReflectUtils;
 
@@ -258,7 +258,7 @@ public abstract class AbstractBatchManagerServiceImpl<T> extends AbstractCacheSe
 
 	private boolean hasSqlSessionFactory(String sqlSessionFactoryBeanName) {
 		if (getSqlSessionFactory() == null) {
-			SqlSessionFactoryBean sqlSessionFactory = (SqlSessionFactoryBean) ApplicationContext
+			SqlSessionFactoryBean sqlSessionFactory = (SqlSessionFactoryBean) ApplicationContextHolder
 					.getBean(sqlSessionFactoryBeanName, SqlSessionFactoryBean.class);
 			if (sqlSessionFactory != null) {
 				return true;
@@ -271,7 +271,7 @@ public abstract class AbstractBatchManagerServiceImpl<T> extends AbstractCacheSe
 		if (getSqlSessionFactory() != null) {
 			return true;
 		}
-		SqlSessionFactoryBean defaultSqlSessionFactory = (SqlSessionFactoryBean) ApplicationContext
+		SqlSessionFactoryBean defaultSqlSessionFactory = (SqlSessionFactoryBean) ApplicationContextHolder
 				.getBean(DEFAULT_SQLSESSIONFACTORY_NAME, SqlSessionFactoryBean.class);
 		if (defaultSqlSessionFactory != null) {
 			setSqlSessionFactory(defaultSqlSessionFactory);
