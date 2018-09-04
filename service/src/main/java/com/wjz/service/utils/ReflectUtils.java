@@ -11,8 +11,6 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.util.ReflectionUtils.FieldCallback;
 import org.springframework.util.ReflectionUtils.MethodCallback;
 
-import com.wjz.service.exception.UnAssignableException;
-
 import javassist.Modifier;
 
 /**
@@ -32,10 +30,6 @@ public abstract class ReflectUtils {
 	public static Type[] resolveActualGenericType(Class<?> targetClass) {
 		Type genericType = targetClass.getGenericSuperclass();
 		return ((ParameterizedType) genericType).getActualTypeArguments();
-	}
-
-	public static <V> List<V> transferDO2VO(Object d, Class<V> v) throws UnAssignableException {
-		return null;
 	}
 
 	/**
@@ -83,6 +77,21 @@ public abstract class ReflectUtils {
 	 */
 	public static boolean isStatic(Field field) {
 		int modifiers = field.getModifiers();
+		if (Modifier.isStatic(modifiers)) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * 判断目标方法是否被 {@code static} 修饰
+	 * 
+	 * @param method
+	 *            目标方法
+	 * @return
+	 */
+	public static boolean isStatic(Method method) {
+		int modifiers = method.getModifiers();
 		if (Modifier.isStatic(modifiers)) {
 			return true;
 		}
