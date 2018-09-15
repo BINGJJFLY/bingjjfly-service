@@ -79,18 +79,20 @@ public abstract class BaseBean<T> implements Serializable {
 			Method[] methods = ReflectUtils.getLocalMethods(clazz);
 			if (!ArrayUtils.isEmpty(methods)) {
 				for (Method method : methods) {
-					String methodName = method.getName();
-					if ((methodName.startsWith("get") && methodName.length() > 3)
-							|| (methodName.startsWith("is") && methodName.length() > 2)) {
-						ReflectionUtils.makeAccessible(method);
-						Object thisVal = ReflectionUtils.invokeMethod(method, this);
-						Object otherVal = ReflectionUtils.invokeMethod(method, other);
-						if (thisVal == null) {
-							if (otherVal != null) {
+					if (!ReflectUtils.isStatic(method)) {
+						String methodName = method.getName();
+						if ((methodName.startsWith("get") && methodName.length() > 3)
+								|| (methodName.startsWith("is") && methodName.length() > 2)) {
+							ReflectionUtils.makeAccessible(method);
+							Object thisVal = ReflectionUtils.invokeMethod(method, this);
+							Object otherVal = ReflectionUtils.invokeMethod(method, other);
+							if (thisVal == null) {
+								if (otherVal != null) {
+									return false;
+								}
+							} else if (!thisVal.equals(otherVal)) {
 								return false;
 							}
-						} else if (!thisVal.equals(otherVal)) {
-							return false;
 						}
 					}
 				}
