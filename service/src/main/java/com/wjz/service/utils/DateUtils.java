@@ -2,8 +2,11 @@ package com.wjz.service.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -18,7 +21,25 @@ public abstract class DateUtils {
 	private static final TimeZone ASIA_SHANGHAI = TimeZone.getTimeZone("Asia/Shanghai"); // 上海时区
 	private static final Locale LOCALE_CHINA = Locale.CHINA; // 中国地区
 
-	private static final String DEFAULT_PATTERN = "yyyy-MM-dd HH:mm:ss";
+	private static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd";
+	private static final String DEFAULT_TIME_PATTERN = "HH:mm:ss";
+	private static final String DEFAULT_COMPLETE_TIME_PATTERN = "HH:mm:ss.SSS";
+	private static final String DEFAULT_DATE_TIME_PATTERN = DEFAULT_DATE_PATTERN + " " + DEFAULT_TIME_PATTERN;
+	private static final String DEFAULT_COMPLETE_DATE_TIME_PATTERN = DEFAULT_DATE_PATTERN + " "
+			+ DEFAULT_COMPLETE_TIME_PATTERN;
+
+	private static final String DEFAULT_DATE_VALUE_PATTERN = "yyyyMMdd";
+	private static final String DEFAULT_TIME_VALUE_PATTERN = "HHmmss";
+	private static final String DEFAULT_COMPLETE_TIME_VALUE_PATTERN = "HHmmssSSS";
+	private static final String DEFAULT_DATE_TIME_VALUE_PATTERN = DEFAULT_DATE_VALUE_PATTERN
+			+ DEFAULT_TIME_VALUE_PATTERN;
+	private static final String DEFAULT_COMPLETE_DATE_TIME_VALUE_PATTERN = DEFAULT_DATE_VALUE_PATTERN
+			+ DEFAULT_COMPLETE_TIME_VALUE_PATTERN;
+	private static final Collection<String> DEFAULT_PATTERNS = Arrays
+			.asList(new String[] { DEFAULT_DATE_PATTERN, DEFAULT_TIME_PATTERN, DEFAULT_COMPLETE_TIME_PATTERN,
+					DEFAULT_DATE_TIME_PATTERN, DEFAULT_COMPLETE_DATE_TIME_PATTERN, DEFAULT_DATE_VALUE_PATTERN,
+					DEFAULT_TIME_VALUE_PATTERN, DEFAULT_COMPLETE_TIME_VALUE_PATTERN, DEFAULT_DATE_TIME_VALUE_PATTERN,
+					DEFAULT_COMPLETE_DATE_TIME_VALUE_PATTERN });
 
 	public static final int SECONDS_PER_MINUTE = 60;
 	public static final int MINUTES_PER_HOUR = 60;
@@ -27,7 +48,7 @@ public abstract class DateUtils {
 	public static final long DAY_MILLISECONDS = SECONDS_PER_DAY * 1000L;
 
 	public static String format(Date date) {
-		return format(date, DEFAULT_PATTERN);
+		return format(date, DEFAULT_DATE_TIME_PATTERN);
 	}
 
 	public static String format(Date date, String pattern) {
@@ -37,7 +58,17 @@ public abstract class DateUtils {
 	}
 
 	public static Date parse(String dateValue) throws DateParseException {
-		return parse(dateValue, DEFAULT_PATTERN);
+		Iterator<String> iterator = DEFAULT_PATTERNS.iterator();
+		while (iterator.hasNext()) {
+			String pattern = (String) iterator.next();
+			try {
+				return parse(dateValue, pattern);
+			} catch (DateParseException e) {
+				// ignore this exception, try the next format
+			}
+		}
+
+		throw new DateParseException("Unable to parse the date " + dateValue);
 	}
 
 	public static Date parse(String dateValue, String pattern) throws DateParseException {
@@ -52,7 +83,7 @@ public abstract class DateUtils {
 	}
 
 	/**
-	 * 设置 {@code HH:MM:SS } 为 {@code 00:00:00:000 }
+	 * 设置 {@code HH:MM:SS.SSS } 为 {@code 00:00:00.000 }
 	 * 
 	 * @param date
 	 * @return
@@ -72,7 +103,7 @@ public abstract class DateUtils {
 	}
 
 	/**
-	 * 设置 {@code HH:MM:SS} 为 {@code 23:59:59:999 }
+	 * 设置 {@code HH:MM:SS.SSS} 为 {@code 23:59:59.999 }
 	 * 
 	 * @param date
 	 * @return
