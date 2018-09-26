@@ -58,7 +58,7 @@ public abstract class DateUtils {
 		return formatter.format(date);
 	}
 
-	public static Date parse(String dateValue) throws DateParseException {
+	public static Date parse(String dateValue) throws ParseException {
 		Iterator<String> iterator = DEFAULT_PATTERNS.iterator();
 		while (iterator.hasNext()) {
 			String pattern = (String) iterator.next();
@@ -72,7 +72,7 @@ public abstract class DateUtils {
 		throw new DateParseException("Unable to parse the date " + dateValue);
 	}
 
-	public static Date parse(String dateValue, String pattern) throws DateParseException {
+	public static Date parse(String dateValue, String pattern) throws ParseException {
 		final SimpleDateFormat dateParser = new SimpleDateFormat(pattern, LOCALE_CHINA);
 		try {
 			return dateParser.parse(dateValue);
