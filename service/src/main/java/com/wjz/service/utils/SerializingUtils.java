@@ -20,6 +20,7 @@ import org.apache.shiro.io.SerializationException;
  * @author iss002
  *
  */
+@Deprecated
 public abstract class SerializingUtils {
 
 	public static final int BYTE_ARRAY_OUTPUT_STREAM_SIZE = 128;

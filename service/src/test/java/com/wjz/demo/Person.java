@@ -3,6 +3,8 @@ package com.wjz.demo;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Transient;
+
 import com.wjz.service.pojo.BaseBean;
 
 public class Person extends BaseBean<Person> {
@@ -11,11 +13,12 @@ public class Person extends BaseBean<Person> {
 
 	private Integer id;
 
+	@Transient
 	private String name;
 
 	private Date addTime;
 
-	private Double asset;
+	private transient Double asset;
 	
 	private boolean used;
 	
