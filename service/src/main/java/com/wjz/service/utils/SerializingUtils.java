@@ -16,8 +16,8 @@ import org.apache.shiro.io.SerializationException;
  * <p>
  * 反序列化：入参对象为字节数组返回对象
  * <p>
- * 序列化、反序列化失败抛出异常： {@link org.apache.shiro.io.SerializationException}
  * @author iss002
+ * @see {@link org.apache.shiro.io.DefaultSerializer DefaultSerializer}
  *
  */
 @Deprecated
