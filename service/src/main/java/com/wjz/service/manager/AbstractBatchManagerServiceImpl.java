@@ -42,6 +42,12 @@ public abstract class AbstractBatchManagerServiceImpl<T> extends AbstractCacheSe
 
 	private Class<?> mapperClass;
 
+	/**
+	 * 泛型类型
+	 * <p>
+	 * 可参考继承 {@link org.apache.ibatis.type.TypeReference}
+	 * </p>
+	 */
 	private Class<T> entityClass;
 
 	private String namespace;
