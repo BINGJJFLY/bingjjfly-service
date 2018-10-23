@@ -3,18 +3,26 @@ package com.wjz.service.pojo;
 import java.util.Date;
 import java.util.List;
 
+import com.wjz.service.annotation.ViewObject;
+import com.wjz.service.annotation.ViewProperty;
+import com.wjz.service.vo.PersonVO;
+
+@ViewObject(type = PersonVO.class)
 public class Person extends BaseBean<Person> {
 
 	private static final long serialVersionUID = -8842122460259361832L;
 
 	private Integer id;
 
+	@ViewProperty("personName")
 	private String name;
 
+	@ViewProperty
 	private Date addTime;
 
+	@ViewProperty(pattern = "0.0000")
 	private Double asset;
-	
+
 	private List<String> list;
 
 	public List<String> getList() {
@@ -24,7 +32,7 @@ public class Person extends BaseBean<Person> {
 	public void setList(List<String> list) {
 		this.list = list;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
