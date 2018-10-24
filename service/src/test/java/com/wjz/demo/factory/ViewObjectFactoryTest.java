@@ -1,5 +1,6 @@
 package com.wjz.demo.factory;
 
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -141,4 +142,10 @@ public class ViewObjectFactoryTest {
 		System.out.println(userVO);
 	}
 	
+	@Test
+	public void transformUnconventional() {
+		user.setMonth(Month.JULY);
+		Object userVO = factory.transform(user);
+		System.out.println(userVO);
+	}
 }

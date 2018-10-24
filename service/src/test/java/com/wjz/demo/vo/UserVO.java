@@ -1,6 +1,7 @@
 package com.wjz.demo.vo;
 
 import java.io.Serializable;
+import java.time.Month;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,8 @@ public class UserVO extends BaseBean<UserVO> implements Serializable {
 	private Map<String, String> stringMap;
 	
 	private Map<String, SonVO> sonMap;
+	
+	private Month month;
 
 	public String getId() {
 		return id;
@@ -88,6 +91,14 @@ public class UserVO extends BaseBean<UserVO> implements Serializable {
 
 	public void setSonMap(Map<String, SonVO> sonMap) {
 		this.sonMap = sonMap;
+	}
+
+	public Month getMonth() {
+		return month;
+	}
+
+	public void setMonth(Month month) {
+		this.month = month;
 	}
 
 }

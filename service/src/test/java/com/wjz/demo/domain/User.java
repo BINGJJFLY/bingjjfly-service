@@ -1,6 +1,7 @@
 package com.wjz.demo.domain;
 
 import java.io.Serializable;
+import java.time.Month;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,16 @@ public class User extends BaseBean<User> implements Serializable {
 	private Map<String, String> stringMap;
 	
 	private Map<String, Son> sonMap;
+	
+	private Month month;
+
+	public Month getMonth() {
+		return month;
+	}
+
+	public void setMonth(Month month) {
+		this.month = month;
+	}
 
 	public Map<String, Son> getSonMap() {
 		return sonMap;
