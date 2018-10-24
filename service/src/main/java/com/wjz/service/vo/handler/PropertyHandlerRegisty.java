@@ -15,6 +15,7 @@ public final class PropertyHandlerRegisty {
 		registy(Date.class, new DatePropertyHandler());
 		registy(Number.class, new NumberPropertyHandler());
 		registy(String.class, new StringPropertyHandler());
+		registy(Boolean.class, new BooleanPropertyHandler());
 		registy(Collection.class, new CollectionPropertyHandler());
 		registy(Map.class, new MapPropertyHandler());
 		registy(void.class, new UnexpectedPropertyHandler());
