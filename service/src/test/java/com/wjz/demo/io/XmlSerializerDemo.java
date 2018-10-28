@@ -27,6 +27,7 @@ public class XmlSerializerDemo {
 		byte[] serialized = xmlSerializer.serialize(person);
 		person = (Person) xmlSerializer.deserialize(serialized);
 		System.out.println(person);
+		System.out.println(new String(serialized));
 
 		XMLEncoder xmlEncoder;
 		try {
