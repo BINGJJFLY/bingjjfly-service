@@ -1,4 +1,4 @@
-package com.wjz.demo.conllectionsDemo;
+package com.wjz.demo.conllections;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -11,6 +11,12 @@ import com.wjz.service.utils.DateUtils;
 
 public class StringAsDoubleComparatorDemo {
 
+	/**
+	 * 集合排序 JDK1.8
+	 * 
+	 * @param args
+	 * @throws ParseException
+	 */
 	public static void main(String[] args) throws ParseException {
 		List<Person> list = new ArrayList<>();
 		Person person = new Person();
