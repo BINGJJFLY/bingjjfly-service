@@ -16,6 +16,10 @@ public abstract class BasePropertyHandler<T> extends CryptoPropertyHandler<T> {
 	@Override
 	public void setValue(String field, Object value, MetaObject viewMetaObject) {
 		if (value != null) {
+			// 需要进行加密处理的字段
+			if (crypto) {
+				value = encrypt(value.toString().getBytes());
+			}
 			viewMetaObject.setValue(field, value);
 		}
 	}

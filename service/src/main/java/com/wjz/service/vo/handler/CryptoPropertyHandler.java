@@ -9,6 +9,8 @@ public abstract class CryptoPropertyHandler<T> extends TypeReference<T> implemen
 	
 	private static final AesCipherService cipherService = new AesCipherService();
 	
+	protected boolean crypto;
+	
 	protected String encrypt(byte[] plaintext) {
 		ByteSource byteSource = cipherService.encrypt(plaintext, CIPHER_KEY);
 		return byteSource.toBase64();
@@ -18,4 +20,9 @@ public abstract class CryptoPropertyHandler<T> extends TypeReference<T> implemen
 		byte[] bytes = cipherService.decrypt(Base64.decode(ciphertext), PropertyHandler.CIPHER_KEY).getBytes();
 		return new String(bytes);
 	}
+
+	public void setCrypto(boolean crypto) {
+		this.crypto = crypto;
+	}
+	
 }

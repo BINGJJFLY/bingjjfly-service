@@ -9,6 +9,7 @@ public class StringPropertyHandler extends BasePropertyHandler<String> {
 	protected void doHandle(Class<?> fieldType, String fieldName, Object fieldValue, ViewProperty propertyAnno,
 			MetaObject domainMetaObject, MetaObject viewMetaObject, Transformer transformer) throws Exception {
 		if (isAssignableFrom(fieldType)) {
+			super.setCrypto(propertyAnno.crypto());
 			setValue(fieldName, fieldValue, viewMetaObject);
 		}
 	}
