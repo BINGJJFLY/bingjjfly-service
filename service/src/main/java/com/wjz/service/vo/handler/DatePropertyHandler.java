@@ -6,6 +6,12 @@ import com.alibaba.dubbo.common.utils.StringUtils;
 import com.wjz.service.annotation.ViewProperty;
 import com.wjz.service.utils.DateUtils;
 
+/**
+ * <b>日期类型加密处理器</b>
+ * 
+ * @author iss002
+ *
+ */
 public class DatePropertyHandler extends BasePropertyHandler<Date> {
 
 	@Override

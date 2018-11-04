@@ -19,7 +19,7 @@ public class User extends BaseBean<User> implements Serializable {
 	@ViewProperty(crypto = true)
 	private Integer id;
 
-	@ViewProperty("personName")
+	@ViewProperty(value = "personName", crypto = true)
 	private String name;
 
 	@ViewProperty(pattern = "yyyy-MM-dd")

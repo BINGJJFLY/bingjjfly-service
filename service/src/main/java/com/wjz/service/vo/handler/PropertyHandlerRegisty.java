@@ -7,6 +7,12 @@ import java.util.Map;
 
 import com.wjz.service.cache.Cache;
 
+/**
+ * <b>属性处理器注册机</b>
+ * 
+ * @author iss002
+ *
+ */
 public final class PropertyHandlerRegisty {
 
 	private final Cache<Type, PropertyHandler> TYPE_HANDLER_MAP = new Cache<Type, PropertyHandler>();

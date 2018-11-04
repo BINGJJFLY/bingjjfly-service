@@ -4,6 +4,12 @@ import java.util.Map;
 import org.apache.ibatis.reflection.MetaObject;
 import com.wjz.service.annotation.ViewProperty;
 
+/**
+ * <b>Map类型属性处理器</b>
+ * 
+ * @author iss002
+ *
+ */
 @SuppressWarnings("rawtypes")
 public class MapPropertyHandler extends BasePropertyHandler<Map> {
 

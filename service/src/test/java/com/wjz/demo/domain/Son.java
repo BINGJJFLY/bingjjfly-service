@@ -13,6 +13,7 @@ public class Son extends BaseBean<Son> implements Serializable {
 
 	private static final long serialVersionUID = -6123663317521994545L;
 
+	@ViewProperty(crypto = true)
 	private Long id;
 
 	private String name;

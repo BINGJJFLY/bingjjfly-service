@@ -5,6 +5,13 @@ import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.AesCipherService;
 import org.apache.shiro.util.ByteSource;
 
+/**
+ * <b>属性对称加密处理器</b>
+ * 
+ * @author iss002
+ *
+ * @param <T>
+ */
 public abstract class CryptoPropertyHandler<T> extends TypeReference<T> implements PropertyHandler {
 	
 	private static final AesCipherService cipherService = new AesCipherService();

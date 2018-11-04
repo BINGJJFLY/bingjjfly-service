@@ -5,6 +5,12 @@ import org.apache.ibatis.reflection.MetaObject;
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.wjz.service.annotation.ViewProperty;
 
+/**
+ * <b>数值类型处理器</b>
+ * 
+ * @author iss002
+ *
+ */
 public class NumberPropertyHandler extends BasePropertyHandler<Number> {
 
 	@Override
@@ -14,7 +20,6 @@ public class NumberPropertyHandler extends BasePropertyHandler<Number> {
 			if (fieldValue != null) {
 				if (propertyAnno != null) {
 					String pattern = propertyAnno.pattern();
-					super.setCrypto(propertyAnno.crypto());
 					if (!StringUtils.isEmpty(pattern)) {
 						fieldValue = new DecimalFormat(pattern).format(fieldValue);
 					}
