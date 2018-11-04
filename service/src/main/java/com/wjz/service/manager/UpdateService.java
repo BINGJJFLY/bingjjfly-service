@@ -1,6 +1,6 @@
 package com.wjz.service.manager;
 
-import com.wjz.service.batch.BatchUpdateService;
+import com.wjz.service.manager.batch.BatchUpdateService;
 
 /**
  * <b>基础更新接口</b>

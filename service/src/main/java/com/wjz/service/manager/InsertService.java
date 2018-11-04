@@ -1,6 +1,6 @@
 package com.wjz.service.manager;
 
-import com.wjz.service.batch.BatchInsertService;
+import com.wjz.service.manager.batch.BatchInsertService;
 
 /**
  * <b>基础插入接口</b>

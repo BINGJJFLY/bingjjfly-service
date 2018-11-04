@@ -1,4 +1,4 @@
-package com.wjz.service.batch;
+package com.wjz.service.manager.batch;
 
 import java.util.Collection;
 

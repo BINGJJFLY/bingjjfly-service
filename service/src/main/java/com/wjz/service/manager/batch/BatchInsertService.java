@@ -1,19 +1,19 @@
-package com.wjz.service.batch;
+package com.wjz.service.manager.batch;
 
 import java.util.Collection;
 
 import com.wjz.service.manager.ManagerException;
 
 /**
- * <b>批量更新接口</b>
+ * <b>批量插入接口</b>
  * 
  * @author iss002
  * @param <T>
  */
-public interface BatchUpdateService<T> {
+public interface BatchInsertService<T> {
 
 	/**
-	 * 批量更新一批数据
+	 * 批量添加一批数据
 	 * <p>
 	 * 默认使用Mybatis的 {@code BatchExecutor} 执行器
 	 * <p>
@@ -21,10 +21,10 @@ public interface BatchUpdateService<T> {
 	 * @param collection
 	 * @throws ManagerException
 	 */
-	void batchUpdateByPrimaryKeySelective(Collection<T> collection) throws ManagerException;
+	void batchInsertSelective(Collection<T> collection) throws ManagerException;
 	
 	/**
-	 * 批量更新一批数据
+	 * 批量添加一批数据
 	 * <p>
 	 * 默认使用Mybatis的 {@code BatchExecutor} 执行器
 	 * <p>
@@ -33,6 +33,5 @@ public interface BatchUpdateService<T> {
 	 * @param sqlSessionFactoryBeanName SqlSessionFactoryBean的id属性值
 	 * @throws ManagerException
 	 */
-	void batchUpdateByPrimaryKeySelective(Collection<T> collection, String sqlSessionFactoryBeanName) throws ManagerException;
-	
+	void batchInsertSelective(Collection<T> collection, String sqlSessionFactoryBeanName) throws ManagerException;
 }
