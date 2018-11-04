@@ -16,6 +16,7 @@ public class User extends BaseBean<User> implements Serializable {
 
 	private static final long serialVersionUID = 5683379393982900285L;
 
+	@ViewProperty(crypto = true)
 	private Integer id;
 
 	@ViewProperty("personName")

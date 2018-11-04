@@ -18,7 +18,9 @@ import com.wjz.service.exception.UnAssignableException;
  *
  */
 public interface PropertyHandler {
-
+	
+	byte[] CIPHER_KEY = "AES_Cipher_Key:.".getBytes();
+	
 	void setValue(String field, Object value, MetaObject viewMetaObject);
 
 	Object getValue(String field, MetaObject domainMetaObject);

@@ -14,8 +14,12 @@ public class NumberPropertyHandler extends BasePropertyHandler<Number> {
 			if (fieldValue != null) {
 				if (propertyAnno != null) {
 					String pattern = propertyAnno.pattern();
+					boolean crypto = propertyAnno.crypto();
 					if (!StringUtils.isEmpty(pattern)) {
 						fieldValue = new DecimalFormat(pattern).format(fieldValue);
+					}
+					if (crypto) {
+						fieldValue = encrypt(fieldValue.toString().getBytes());
 					}
 				} else {
 					fieldValue = String.valueOf(fieldValue);

@@ -34,4 +34,9 @@ public @interface ViewProperty {
 	 */
 	String pattern() default "";
 	
+	/**
+	 * ViewObject对象属性是否进行对称加密
+	 * @return
+	 */
+	boolean crypto() default false;
 }

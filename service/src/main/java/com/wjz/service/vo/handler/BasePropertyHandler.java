@@ -3,14 +3,13 @@ package com.wjz.service.vo.handler;
 import java.lang.reflect.Field;
 
 import org.apache.ibatis.reflection.MetaObject;
-import org.apache.ibatis.type.TypeReference;
 import org.springframework.core.annotation.AnnotationUtils;
 
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.wjz.service.annotation.ViewProperty;
 import com.wjz.service.exception.UnAssignableException;
 
-public abstract class BasePropertyHandler<T> extends TypeReference<T> implements PropertyHandler {
+public abstract class BasePropertyHandler<T> extends CryptoPropertyHandler<T> {
 
 	protected static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
 

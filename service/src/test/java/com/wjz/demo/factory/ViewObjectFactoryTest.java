@@ -12,8 +12,10 @@ import org.junit.Test;
 
 import com.wjz.demo.domain.Son;
 import com.wjz.demo.domain.User;
+import com.wjz.demo.vo.UserVO;
 import com.wjz.service.factory.DefaultViewObjectFactory;
 import com.wjz.service.factory.ViewObjectFactory;
+import com.wjz.service.vo.handler.CryptoPropertyHandler;
 
 public class ViewObjectFactoryTest {
 	
@@ -147,5 +149,13 @@ public class ViewObjectFactoryTest {
 		user.setMonth(Month.JULY);
 		Object userVO = factory.transform(user);
 		System.out.println(userVO);
+	}
+	
+	@Test
+	public void transformBeanWithCrypto() {
+		Object userVO = factory.transform(user);
+		System.out.println(userVO);
+		String id = ((UserVO) userVO).getId();
+		System.out.println(CryptoPropertyHandler.decrypt(id));
 	}
 }
