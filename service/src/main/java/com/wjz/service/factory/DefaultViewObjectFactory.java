@@ -23,7 +23,7 @@ import org.springframework.core.annotation.AnnotationUtils;
 import com.wjz.service.annotation.ViewObject;
 import com.wjz.service.exception.UnAssignableException;
 import com.wjz.service.vo.handler.PropertyHandler;
-import com.wjz.service.vo.handler.PropertyHandlerRegisty;
+import com.wjz.service.vo.handler.PropertyHandlerRegistry;
 import com.wjz.service.vo.handler.Transformer;
 
 /**
@@ -39,7 +39,7 @@ public class DefaultViewObjectFactory extends ViewObjectFactory {
 
 	private static final Logger log = LoggerFactory.getLogger(DefaultViewObjectFactory.class);
 
-	private final PropertyHandlerRegisty registy = new PropertyHandlerRegisty();
+	private final PropertyHandlerRegistry registy = new PropertyHandlerRegistry();
 
 	@Override
 	public Object transform(Object domain) throws UnAssignableException {

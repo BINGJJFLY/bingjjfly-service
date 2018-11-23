@@ -7,11 +7,16 @@ import java.util.Map;
 
 import com.wjz.service.cache.Cache;
 
-public final class PropertyHandlerRegisty {
+public final class PropertyHandlerRegistry {
 
 	private final Cache<Type, PropertyHandler> TYPE_HANDLER_MAP = new Cache<Type, PropertyHandler>();
 
-	public PropertyHandlerRegisty() {
+	/**
+	 * 是否可以通过VFS方式，获得所有的handler(注解方式)，注解中说明处理类型
+	 * @see org.apache.ibatis.binding.MapperRegistry MapperRegistry
+	 * @see org.apache.ibatis.type.TypeHandlerRegistry TypeHandlerRegistry
+	 */
+	public PropertyHandlerRegistry() {
 		registy(Date.class, new DatePropertyHandler());
 		registy(Number.class, new NumberPropertyHandler());
 		registy(String.class, new StringPropertyHandler());
