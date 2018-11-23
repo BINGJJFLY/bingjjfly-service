@@ -3,6 +3,12 @@ package com.wjz.service.vo.handler;
 import org.apache.ibatis.reflection.MetaObject;
 import com.wjz.service.annotation.ViewProperty;
 
+/**
+ * <b>字符串类型字段处理器</b>
+ * 
+ * @author iss002
+ *
+ */
 public class StringPropertyHandler extends BasePropertyHandler<String> {
 
 	@Override

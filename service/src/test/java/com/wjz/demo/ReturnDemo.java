@@ -4,7 +4,7 @@ public class ReturnDemo {
 
 	public static void main(String[] args) {
 		String s = hello();
-//		System.out.println(s);
+		System.out.println(s);
 		
 		String test1 = "hi";
 		String test2 = "中国";
@@ -22,6 +22,7 @@ public class ReturnDemo {
 	}
 	
 	// 仅仅是不执行return 后的内容
+	@SuppressWarnings("unused")
 	public static void check() {
 		if (true) {
 			return;

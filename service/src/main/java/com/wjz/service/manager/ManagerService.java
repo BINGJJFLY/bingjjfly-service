@@ -1,7 +1,5 @@
 package com.wjz.service.manager;
 
-import com.wjz.service.asserter.Asserter;
-
 /**
  * <b>基础接口定义</b>
  * <p>
@@ -16,6 +14,6 @@ public interface ManagerService<T> extends
 	DeleteService<T>, 
 	UpdateService<T>, 
 	SelectService<T>, 
-	Asserter {
+	ProcedureService {
 
 }

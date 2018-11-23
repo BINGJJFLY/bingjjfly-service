@@ -4,6 +4,12 @@ import java.util.Collection;
 import org.apache.ibatis.reflection.MetaObject;
 import com.wjz.service.annotation.ViewProperty;
 
+/**
+ * <b>集合属性处理器</b>
+ * 
+ * @author iss002
+ *
+ */
 @SuppressWarnings("rawtypes")
 public class CollectionPropertyHandler extends BasePropertyHandler<Collection> {
 

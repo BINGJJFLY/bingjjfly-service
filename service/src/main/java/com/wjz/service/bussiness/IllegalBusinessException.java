@@ -6,6 +6,7 @@ import com.wjz.service.exception.ServiceException;
  * <b>Business Service层异常类</b>
  * <p>
  * 不符合业务需求时抛出该异常
+ * </p>
  * 
  * @author iss002
  *

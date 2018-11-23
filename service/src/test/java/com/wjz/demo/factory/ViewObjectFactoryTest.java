@@ -156,6 +156,9 @@ public class ViewObjectFactoryTest {
 		Object userVO = factory.transform(user);
 		System.out.println(userVO);
 		String id = ((UserVO) userVO).getId();
+		String name = ((UserVO) userVO).getPersonName();
 		System.out.println(CryptoPropertyHandler.decrypt(id));
+		System.out.println(CryptoPropertyHandler.decrypt(name));
 	}
+	
 }
