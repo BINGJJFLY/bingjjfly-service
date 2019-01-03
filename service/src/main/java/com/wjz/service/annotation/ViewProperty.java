@@ -47,4 +47,18 @@ public @interface ViewProperty {
 	 * @return
 	 */
 	boolean crypto() default false;
+	
+	/**
+	 * 是否进行转换
+	 * 
+	 * @return
+	 */
+	boolean working() default true;
+	
+	/**
+	 * 是否可转换
+	 * 
+	 * @return
+	 */
+	boolean convertible() default true;
 }

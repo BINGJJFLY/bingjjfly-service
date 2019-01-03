@@ -1,7 +1,11 @@
 package com.wjz.service.vo.handler;
 
 import java.text.DecimalFormat;
+
 import org.apache.ibatis.reflection.MetaObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.wjz.service.annotation.ViewProperty;
 
@@ -11,23 +15,31 @@ import com.wjz.service.annotation.ViewProperty;
  * @author iss002
  *
  */
-public class NumberPropertyHandler extends BasePropertyHandler<Number> {
+public class NumberPropertyHandler<T> extends BasePropertiesHandler<T> {
+
+	private static final Logger log = LoggerFactory.getLogger(NumberPropertyHandler.class);
 
 	@Override
-	protected void doHandle(Class<?> fieldType, String fieldName, Object fieldValue, ViewProperty propertyAnno,
-			MetaObject domainMetaObject, MetaObject viewMetaObject, Transformer transformer) throws Exception {
+	protected void doHandle(Class<T> fieldType, String fieldName, Object fieldValue, ViewProperty propertyAnno,
+			MetaObject domainMetaObject, MetaObject viewMetaObject, Converter converter) {
 		if (isAssignableFrom(fieldType)) {
 			if (fieldValue != null) {
-				if (propertyAnno != null) {
-					String pattern = propertyAnno.pattern();
-					if (!StringUtils.isEmpty(pattern)) {
-						fieldValue = new DecimalFormat(pattern).format(fieldValue);
+				try {
+					if (propertyAnno != null) {
+						String pattern = propertyAnno.pattern();
+						if (!StringUtils.isEmpty(pattern)) {
+							fieldValue = new DecimalFormat(pattern).format(fieldValue);
+						}
+					} else {
+						fieldValue = String.valueOf(fieldValue);
 					}
-				} else {
+				} catch (Exception e) {
+					String error = "An exception occurs when numeric types are converted to string types. fieldName[{}], fieldValue[{}], domain[{}]";
+					log.error(error, fieldName, fieldValue, domainMetaObject.getOriginalObject(), e);
 					fieldValue = String.valueOf(fieldValue);
 				}
+				setValue(fieldName, fieldValue, viewMetaObject);
 			}
-			setValue(fieldName, fieldValue, viewMetaObject);
 		}
 	}
 

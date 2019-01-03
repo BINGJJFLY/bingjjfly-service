@@ -1,6 +1,7 @@
 package com.wjz.service.vo.handler;
 
 import org.apache.ibatis.reflection.MetaObject;
+
 import com.wjz.service.annotation.ViewProperty;
 
 /**
@@ -9,13 +10,15 @@ import com.wjz.service.annotation.ViewProperty;
  * @author iss002
  *
  */
-public class BooleanPropertyHandler extends BasePropertyHandler<Boolean> {
+public class BooleanPropertyHandler extends BasePropertiesHandler<Boolean> {
 
 	@Override
-	protected void doHandle(Class<?> fieldType, String fieldName, Object fieldValue, ViewProperty propertyAnno,
-			MetaObject domainMetaObject, MetaObject viewMetaObject, Transformer transformer) throws Exception {
+	protected void doHandle(Class<Boolean> fieldType, String fieldName, Object fieldValue, ViewProperty propertyAnno,
+			MetaObject domainMetaObject, MetaObject viewMetaObject, Converter converter) {
 		if (isAssignableFrom(fieldType)) {
-			setValue(fieldName, fieldValue, viewMetaObject);
+			if (fieldValue != null) {
+				setValue(fieldName, fieldValue, viewMetaObject);
+			}
 		}
 	}
 

@@ -1,23 +1,25 @@
 package com.wjz.service.vo.handler;
 
 import org.apache.ibatis.reflection.MetaObject;
+
 import com.wjz.service.annotation.ViewProperty;
+import com.wjz.service.vo.magician.SingleDO2VOMagician;
 
 /**
- * <b>未知类型属性处理器</b>
- * <p>
- * 属性类型不存在指定属性处理器故不做处理，特殊处理扩展属性处理器即可
- * </p>
+ * <b>JavaBean属性处理器</b>
  * 
- * @author iss002
+ * @author 123
  *
  */
-public class UnexpectedPropertyHandler extends BasePropertiesHandler<Object> {
+public class BeanPropertyHandler extends BasePropertiesHandler<Object> {
 
 	@Override
 	protected void doHandle(Class<Object> fieldType, String fieldName, Object fieldValue, ViewProperty propertyAnno,
 			MetaObject domainMetaObject, MetaObject viewMetaObject, Converter converter) {
 		if (fieldValue != null) {
+			if (propertyAnno == null || propertyAnno.convertible()) {
+				fieldValue = converter.convert(new SingleDO2VOMagician(), fieldValue);
+			}
 			setValue(fieldName, fieldValue, viewMetaObject);
 		}
 	}

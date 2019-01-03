@@ -18,7 +18,7 @@ public class Son extends BaseBean<Son> implements Serializable {
 
 	private String name;
 
-	@ViewProperty(pattern = "0.000")
+	@ViewProperty(pattern = "0.00")
 	private Double stature;
 
 	private Date birthday;

@@ -15,7 +15,7 @@ public class SpringAliasForAnnoDemo {
 		Person person = new Person();
 		ViewObject viewObjectAnno = AnnotationUtils.getAnnotation(person.getClass(), ViewObject.class);
 		Assert.assertEquals(Integer.class, viewObjectAnno.value());
-		Assert.assertEquals(Integer.class, viewObjectAnno.type());
+//		Assert.assertEquals(Integer.class, viewObjectAnno.type());
 		
 		try {
 			ViewProperty viewPropertyAnno = AnnotationUtils.getAnnotation(person.getClass().getDeclaredField("addTime"), ViewProperty.class);

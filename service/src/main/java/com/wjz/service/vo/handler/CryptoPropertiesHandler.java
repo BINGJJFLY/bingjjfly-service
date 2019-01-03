@@ -12,7 +12,7 @@ import org.apache.shiro.util.ByteSource;
  *
  * @param <T>
  */
-public abstract class CryptoPropertyHandler<T> extends TypeReference<T> implements PropertyHandler {
+public abstract class CryptoPropertiesHandler<T> extends TypeReference<T> implements PropertiesHandler {
 	
 	private static final AesCipherService cipherService = new AesCipherService();
 	
@@ -24,7 +24,7 @@ public abstract class CryptoPropertyHandler<T> extends TypeReference<T> implemen
 	}
 	
 	public static String decrypt(String ciphertext) {
-		byte[] bytes = cipherService.decrypt(Base64.decode(ciphertext), PropertyHandler.CIPHER_KEY).getBytes();
+		byte[] bytes = cipherService.decrypt(Base64.decode(ciphertext), PropertiesHandler.CIPHER_KEY).getBytes();
 		return new String(bytes);
 	}
 

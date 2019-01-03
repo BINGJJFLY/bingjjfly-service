@@ -5,34 +5,44 @@ import java.lang.reflect.Field;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 
-public class DefaultMetaObjectManager<T> implements MetaObjectManager<T> {
-	
+/**
+ * <b>默认的元对象管理者</b>
+ * 
+ * @author iss002
+ *
+ */
+public class DefaultMetaObjectManager implements MetaObjectManager {
+
+	/**
+	 * 元对象
+	 * <p>
+	 * 通过反射查询、设置对象属性值
+	 * </p>
+	 */
 	private MetaObject metaObject;
-	
-	public DefaultMetaObjectManager(T t) {
+
+	public DefaultMetaObjectManager(Object t) {
 		this.metaObject = SystemMetaObject.forObject(t);
 	}
-	
+
 	@Override
 	public MetaObject getMetaObject() {
 		return metaObject;
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	@Override
-	public T getOriginalObject() {
-		return (T) metaObject.getOriginalObject();
+	public Object getOriginalObject() {
+		return metaObject.getOriginalObject();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public Class<T> getOriginalObjectType() {
-		return (Class<T>) getOriginalObject().getClass();
+	public Class<?> getOriginalObjectType() {
+		return getOriginalObject().getClass();
 	}
 
 	@Override
 	public Field[] getDeclaredFields() {
 		return getOriginalObjectType().getDeclaredFields();
 	}
-	
+
 }

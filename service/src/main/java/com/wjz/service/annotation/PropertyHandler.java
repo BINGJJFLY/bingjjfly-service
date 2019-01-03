@@ -7,18 +7,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <b>DomainObject转换ViewObject注解</b>
- * 
- * @author iss002
+ * 属性处理器扩展注解
+ * @author 123
  *
  */
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface ViewObject {
+public @interface PropertyHandler {
 
 	/**
-	 * ViewObject类型
+	 * 属性类型
 	 * 
 	 * @return
 	 */

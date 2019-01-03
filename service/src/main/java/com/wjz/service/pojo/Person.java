@@ -7,7 +7,7 @@ import com.wjz.service.annotation.ViewObject;
 import com.wjz.service.annotation.ViewProperty;
 import com.wjz.service.vo.PersonVO;
 
-@ViewObject(type = PersonVO.class)
+@ViewObject(PersonVO.class)
 public class Person extends BaseBean<Person> {
 
 	private static final long serialVersionUID = -8842122460259361832L;

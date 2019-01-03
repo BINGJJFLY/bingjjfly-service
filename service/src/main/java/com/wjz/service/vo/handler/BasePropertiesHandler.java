@@ -3,6 +3,8 @@ package com.wjz.service.vo.handler;
 import java.lang.reflect.Field;
 
 import org.apache.ibatis.reflection.MetaObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
 
 import com.alibaba.dubbo.common.utils.StringUtils;
@@ -16,7 +18,9 @@ import com.wjz.service.exception.UnAssignableException;
  *
  * @param <T>
  */
-public abstract class BasePropertyHandler<T> extends CryptoPropertyHandler<T> {
+public abstract class BasePropertiesHandler<T> extends CryptoPropertiesHandler<T> {
+
+	private static final Logger log = LoggerFactory.getLogger(BasePropertiesHandler.class);
 
 	protected static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
@@ -43,14 +47,17 @@ public abstract class BasePropertyHandler<T> extends CryptoPropertyHandler<T> {
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void handle(Field field, MetaObject domainMetaObject, MetaObject viewMetaObject, Transformer transformer)
+	public void handle(Field field, MetaObject domainMetaObject, MetaObject viewMetaObject, Converter converter)
 			throws UnAssignableException {
+		String fieldName = null;
+		Object fieldValue = null;
+		boolean working = true;
 		try {
-			String fieldName = field.getName();
-			Object fieldValue = getValue(fieldName, domainMetaObject);
-			Class<?> fieldType = field.getType();
-			// 检查属性上是否有@ViewProperty注解
+			fieldName = field.getName();
+			fieldValue = getValue(fieldName, domainMetaObject);
+			Class<T> fieldType = (Class<T>) field.getType();
 			ViewProperty propertyAnno = AnnotationUtils.getAnnotation(field, ViewProperty.class);
 			if (propertyAnno != null) {
 				String name = propertyAnno.name();
@@ -61,15 +68,20 @@ public abstract class BasePropertyHandler<T> extends CryptoPropertyHandler<T> {
 				}
 				// 属性加密处理
 				setCrypto(crypto);
+				// 是否进行转换
+				working = propertyAnno.working();
 			}
-
-			doHandle(fieldType, fieldName, fieldValue, propertyAnno, domainMetaObject, viewMetaObject, transformer);
+			
+			if (working) {
+				doHandle(fieldType, fieldName, fieldValue, propertyAnno, domainMetaObject, viewMetaObject, converter);
+			}
 		} catch (Exception e) {
+			log.error("An exception occurs when handling property. fieldName[{}], fieldValue[{}], domain[{}]",
+					fieldName, fieldValue, domainMetaObject.getOriginalObject(), e);
 			throw new UnAssignableException(e);
 		}
 	}
 
-	protected abstract void doHandle(Class<?> fieldType, String fieldName, Object fieldValue, ViewProperty propertyAnno,
-			MetaObject domainMetaObject, MetaObject viewMetaObject, Transformer transformer) throws Exception;
-
+	protected abstract void doHandle(Class<T> fieldType, String fieldName, Object fieldValue, ViewProperty propertyAnno,
+			MetaObject domainMetaObject, MetaObject viewMetaObject, Converter converter);
 }
