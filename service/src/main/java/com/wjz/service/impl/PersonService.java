@@ -1,4 +1,4 @@
-package com.wjz.service.bussiness;
+package com.wjz.service.impl;
 
 public interface PersonService {
 

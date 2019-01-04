@@ -1,4 +1,4 @@
-package com.wjz.service.bussiness;
+package com.wjz.service.manager;
 
 import java.io.Serializable;
 
@@ -19,14 +19,13 @@ import tk.mybatis.mapper.common.Mapper;
  * 该类由各基础业务接口实现类继承如：
  * </p>
  * <p>
- * <em>PersonServiceImpl extends AbstractBusinessServiceImpl<Person> implements
- * PersonService</em>
+ * <em>PersonServiceImpl extends BaseServiceImpl implements PersonService</em>
  * </p>
  * <p>
- * 继承了该类的基础接口实现类都具备了 <em>操作数据库的功能</em> 和 <em>缓存功能</em> 和 <em>断言校验功能</em>
+ * 继承了该类的基础接口实现类都具备了 <em>操作数据库的功能</em> 和 <em>缓存功能</em>
  * </p>
  * <p>
- * 该类继承了 {@link AbstractManagerServiceImpl} 具备了操作数据的功能
+ * 该类继承了 {@link AbstractManagerServiceImpl} 具备了操作数据库的功能
  * </p>
  * <p>
  * Redis缓存器 {@link RedisOperations}，注入 {@code RedisTemplate} 后默认使用
@@ -39,7 +38,7 @@ import tk.mybatis.mapper.common.Mapper;
  * @author iss002
  * @param <T>
  */
-public abstract class AbstractBusinessServiceImpl<T extends Serializable> extends AbstractManagerServiceImpl<T> {
+public abstract class BaseServiceImpl<T extends Serializable> extends AbstractManagerServiceImpl<T> {
 
 	/**
 	 * Redis缓存器
@@ -51,15 +50,15 @@ public abstract class AbstractBusinessServiceImpl<T extends Serializable> extend
 	 */
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 
-	public AbstractBusinessServiceImpl() {
+	public BaseServiceImpl() {
 		super();
 	}
 
-	public AbstractBusinessServiceImpl(Mapper<T> mapper) {
+	public BaseServiceImpl(Mapper<T> mapper) {
 		super(mapper);
 	}
 
-	public AbstractBusinessServiceImpl(Mapper<T> mapper, SqlSessionFactoryBean sqlSessionFactory) {
+	public BaseServiceImpl(Mapper<T> mapper, SqlSessionFactoryBean sqlSessionFactory) {
 		super(mapper, sqlSessionFactory);
 	}
 

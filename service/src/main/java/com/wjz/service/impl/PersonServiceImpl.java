@@ -1,10 +1,9 @@
 package com.wjz.service.impl;
 
-import com.wjz.service.bussiness.AbstractBusinessServiceImpl;
-import com.wjz.service.bussiness.PersonService;
+import com.wjz.service.manager.BaseServiceImpl;
 import com.wjz.service.pojo.Person;
 
-public class PersonServiceImpl extends AbstractBusinessServiceImpl<Person> implements PersonService {
+public class PersonServiceImpl extends BaseServiceImpl<Person> implements PersonService {
 
 /*  构造器方式注入 tk.mybatis.mapper.common.Mapper
  

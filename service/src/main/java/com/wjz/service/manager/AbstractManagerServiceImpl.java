@@ -44,7 +44,7 @@ public abstract class AbstractManagerServiceImpl<T> extends AbstractBatchManager
 	@Override
 	public Integer insertSelective(T t) throws ManagerException {
 		hasMapper();
-		log.info("try to insert a entity [" + getEntityClass() + "]/r/n" + t.toString());
+		log.info("try to insert a entity [" + getEntityClass() + "]\r\n" + t.toString());
 		return getMapper().insertSelective(t);
 	}
 
@@ -58,7 +58,7 @@ public abstract class AbstractManagerServiceImpl<T> extends AbstractBatchManager
 	@Override
 	public Integer updateByPrimaryKeySelective(T t) throws ManagerException {
 		hasMapper();
-		log.info("try to update a entity [" + getEntityClass() + "]/r/n" + t.toString());
+		log.info("try to update a entity [" + getEntityClass() + "]\r\n" + t.toString());
 		return getMapper().updateByPrimaryKeySelective(t);
 	}
 

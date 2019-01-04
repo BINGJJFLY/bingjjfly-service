@@ -1,4 +1,4 @@
-package com.wjz.service.bussiness;
+package com.wjz.service.exception;
 
 import com.wjz.service.exception.ServiceException;
 
