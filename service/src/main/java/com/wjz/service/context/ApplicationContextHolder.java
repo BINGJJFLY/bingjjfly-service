@@ -29,21 +29,21 @@ public class ApplicationContextHolder implements ApplicationContextAware {
 
 	public static Object getBean(String beanName) {
 		if (StringUtils.isEmpty(beanName)) {
-			throw new NullPointerException("beanName is null");
+			return null;
 		}
 		return getApplicationContext().getBean(beanName);
 	}
 
 	public static Object getBean(Class<?> beanType) {
 		if (beanType == null) {
-			throw new NullPointerException("beanType is null");
+			return null;
 		}
 		return getApplicationContext().getBean(beanType);
 	}
 
 	public static Object getBean(String beanName, Class<?> beanType) {
-		if (StringUtils.isEmpty(beanName) || beanType == null) {
-			throw new NullPointerException("beanName [" + beanName + "] or beanType [" + beanType + "] is null");
+		if (StringUtils.isEmpty(beanName)) {
+			return null;
 		}
 		return getApplicationContext().getBean(beanName, beanType);
 	}

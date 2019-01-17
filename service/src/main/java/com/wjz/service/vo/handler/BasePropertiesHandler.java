@@ -6,8 +6,8 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.util.StringUtils;
 
-import com.alibaba.dubbo.common.utils.StringUtils;
 import com.wjz.service.annotation.ViewProperty;
 import com.wjz.service.exception.UnAssignableException;
 
