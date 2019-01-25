@@ -1,67 +1,30 @@
 package com.wjz.service.impl;
 
-import com.wjz.service.manager.BaseServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.wjz.service.pojo.Person;
+
+import tk.mybatis.mapper.common.Mapper;
 
 public class PersonServiceImpl extends BaseServiceImpl<Person> implements PersonService {
 
-/*  构造器方式注入 tk.mybatis.mapper.common.Mapper
- 
+	/**
+	 * 构造器方式注入 tk.mybatis.mapper.common.Mapper
+	 */
 	private PersonMapper<Person> personMapper;
-	
+
 	@Autowired
 	public PersonServiceImpl(Mapper<Person> personMapper) {
 		super(personMapper);
 	}
-*/	
 
-/*  set方式注入 tk.mybatis.mapper.common.Mapper
-	
-	@Autowired
-	private Mapper<Person> personMapper;
-	 
-	public PersonServiceImpl() {
-		setMapper(personMapper);
+	@Override
+	public Person selectById(Integer id) {
+		return personMapper.selectByPrimaryKey(id);
 	}
-*/	
 
-/*  构造器方式注入tk.mybatis.mapper.common.Mapper、org.mybatis.spring.SqlSessionFactoryBean
-	
-	private Mapper<Person> personMapper;
-	
-	@Autowired
-	public PersonServiceImpl(Mapper<Person> personMapper, SqlSessionFactoryBean sqlSessionFactory) {
-		super(personMapper, sqlSessionFactory);
+	private interface PersonMapper<T> extends Mapper<T> {
+
 	}
-*/	
-	
-/*
-	set方式注入tk.mybatis.mapper.common.Mapper、org.mybatis.spring.SqlSessionFactoryBean
-	
-	@Autowired
-	private Mapper<Person> personMapper;
-	
-	@Autowired
-	private SqlSessionFactoryBean sqlSessionFactory;
-	
-	public PersonServiceImpl() {
-		setMapper(personMapper);
-		setSqlSessionFactory(sqlSessionFactory);
-	}
-*/
-	
-/*  构造器方式注入tk.mybatis.mapper.common.Mapper、set方式注入org.mybatis.spring.SqlSessionFactoryBean
-	
-	private Mapper<Person> personMapper;
-	
-	@Autowired
-	private SqlSessionFactoryBean sqlSessionFactory;
-	
-	@Autowired
-	public PersonServiceImpl(Mapper<Person> personMapper) {
-		super(personMapper);
-		setSqlSessionFactory(sqlSessionFactory);
-	}
-*/
-	
+
 }

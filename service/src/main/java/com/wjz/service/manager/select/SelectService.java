@@ -1,4 +1,4 @@
-package com.wjz.service.manager;
+package com.wjz.service.manager.select;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,10 +9,11 @@ import java.util.List;
  * @author iss002
  * @param <T>
  */
-public interface SelectService<T> extends SelectByPageInfoService<T> {
+public interface SelectService<T> {
 
 	/**
 	 * 根据主键查询
+	 * 
 	 * @param primaryKey
 	 * @return
 	 */
@@ -22,29 +23,23 @@ public interface SelectService<T> extends SelectByPageInfoService<T> {
 	 * 根据动态查询条件查询集合
 	 * <p>
 	 * 此方法需要复写，由具体的业务接口实现类具体实现
+	 * </p>
+	 * 
 	 * @param t
 	 * @return
 	 */
 	List<T> selectList(T t);
-	
+
 	/**
 	 * 根据DO属性信息查询
 	 * <p>
 	 * 一个属性名对应一个属性值如：{"name" : "wjz"}
-	 * @param property 属性名
-	 * @param value 属性值
+	 * </p>
+	 * 
+	 * @param property
+	 * @param value
 	 * @return
 	 */
 	List<T> selectByProperty(String property, Object value);
-	
-	/**
-	 * 根据DO属性信息集合查询
-	 * <p>
-	 * 一个属性名对应一个属性值如：{"name" : "wjz", "age" : "18"}
-	 * @param properties
-	 * @param values
-	 * @return
-	 */
-	List<T> selectByProperty(String[] properties, Object[] values);
-	
+
 }

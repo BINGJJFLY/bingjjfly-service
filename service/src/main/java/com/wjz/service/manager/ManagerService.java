@@ -1,19 +1,22 @@
 package com.wjz.service.manager;
 
+import com.wjz.service.manager.delete.batch.BatchDeleteService;
+import com.wjz.service.manager.insert.batch.BatchInsertService;
+import com.wjz.service.manager.procedure.ProcedureService;
+import com.wjz.service.manager.select.page.SelectByPageInfoService;
+import com.wjz.service.manager.update.batch.BatchUpdateService;
+
 /**
- * <b>基础接口定义</b>
- * <p>
- * 操作数据库的基础行为
- * <p>
- * 断言校验行为
+ * <b>数据库基础操作接口</b>
+ * 
  * @author iss002
  * @param <T>
  */
 public interface ManagerService<T> extends 
-	InsertService<T>, 
-	DeleteService<T>, 
-	UpdateService<T>, 
-	SelectService<T>, 
-	ProcedureService {
+		BatchInsertService<T>,
+		BatchDeleteService<T>,
+		BatchUpdateService<T>, 
+		SelectByPageInfoService<T>, 
+		ProcedureService<T> {
 
 }

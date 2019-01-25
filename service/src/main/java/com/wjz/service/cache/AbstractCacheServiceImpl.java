@@ -12,7 +12,6 @@ package com.wjz.service.cache;
 public abstract class AbstractCacheServiceImpl implements CacheService {
 
 	private static Cache<String, Object> cache = null;
-	
 	private final Object lock = new Object();
 
 	@Override
