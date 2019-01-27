@@ -19,7 +19,7 @@ public class DefaultInsertService<T> extends BatchAssistant<T> implements Insert
 	}
 
 	@Override
-	public Integer insertSelective(T t) throws ManagerException {
+	public int insertSelective(T t) throws ManagerException {
 		log.info("try to insert a entity [" + getEntityClass() + "]\r\n" + t.toString());
 		return getMapper().insertSelective(t);
 	}

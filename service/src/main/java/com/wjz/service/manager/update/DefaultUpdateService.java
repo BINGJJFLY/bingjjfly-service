@@ -19,7 +19,7 @@ public class DefaultUpdateService<T> extends BatchAssistant<T> implements Update
 	}
 
 	@Override
-	public Integer updateByPrimaryKeySelective(T t) throws ManagerException {
+	public int updateByPrimaryKeySelective(T t) throws ManagerException {
 		log.info("try to update a entity [" + getEntityClass() + "]\r\n" + t.toString());
 		return getMapper().updateByPrimaryKeySelective(t);
 	}

@@ -21,7 +21,7 @@ public class DefaultDeleteService<T> extends BatchAssistant<T> implements Delete
 	}
 
 	@Override
-	public Integer deleteByPrimaryKey(Serializable primaryKey) throws ManagerException {
+	public int deleteByPrimaryKey(Serializable primaryKey) throws ManagerException {
 		log.info("try to delete a entity [" + getEntityClass() + "] the primaryKey is [" + primaryKey + "]");
 		return getMapper().deleteByPrimaryKey(primaryKey);
 	}

@@ -22,7 +22,7 @@ public abstract class UpdateServiceDelegate<T> extends SelectServiceDelegate<T> 
 	}
 
 	@Override
-	public Integer updateByPrimaryKeySelective(T t) throws ManagerException {
+	public int updateByPrimaryKeySelective(T t) throws ManagerException {
 		return delegate.updateByPrimaryKeySelective(t);
 	}
 

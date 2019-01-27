@@ -22,7 +22,7 @@ public abstract class InsertServiceDelegate<T> extends DeleteServiceDelegate<T> 
 	}
 
 	@Override
-	public Integer insertSelective(T t) throws ManagerException {
+	public int insertSelective(T t) throws ManagerException {
 		return delegate.insertSelective(t);
 	}
 

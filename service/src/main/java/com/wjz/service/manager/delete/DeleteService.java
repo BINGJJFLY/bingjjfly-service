@@ -19,5 +19,5 @@ public interface DeleteService<T> {
 	 * @return
 	 * @throws ManagerException
 	 */
-	Integer deleteByPrimaryKey(Serializable primaryKey) throws ManagerException;
+	int deleteByPrimaryKey(Serializable primaryKey) throws ManagerException;
 }

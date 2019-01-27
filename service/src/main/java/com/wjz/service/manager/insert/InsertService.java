@@ -17,5 +17,5 @@ public interface InsertService<T> {
 	 * @return
 	 * @throws Exception
 	 */
-	Integer insertSelective(T t) throws ManagerException;
+	int insertSelective(T t) throws ManagerException;
 }

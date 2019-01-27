@@ -24,7 +24,7 @@ public abstract class DeleteServiceDelegate<T> extends UpdateServiceDelegate<T> 
 	}
 
 	@Override
-	public Integer deleteByPrimaryKey(Serializable primaryKey) throws ManagerException {
+	public int deleteByPrimaryKey(Serializable primaryKey) throws ManagerException {
 		return delegate.deleteByPrimaryKey(primaryKey);
 	}
 

@@ -17,5 +17,5 @@ public interface UpdateService<T> {
 	 * @return
 	 * @throws ManagerException
 	 */
-	Integer updateByPrimaryKeySelective(T t) throws ManagerException;
+	int updateByPrimaryKeySelective(T t) throws ManagerException;
 }
