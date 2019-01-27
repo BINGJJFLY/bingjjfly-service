@@ -11,18 +11,31 @@ public class PersonServiceImpl extends BaseServiceImpl<Person> implements Person
 	/**
 	 * 构造器方式注入 tk.mybatis.mapper.common.Mapper
 	 */
-	private PersonMapper<Person> personMapper;
-
 	@Autowired
-	public PersonServiceImpl(Mapper<Person> personMapper) {
+	public PersonServiceImpl(PersonMapper<Person> personMapper) {
 		super(personMapper);
 	}
 
 	@Override
 	public Person selectById(Integer id) {
-		return personMapper.selectByPrimaryKey(id);
+		return selectByPrimaryKey(id);
 	}
 
+	@Override
+	public int insert(Person person) {
+		return insertSelective(person);
+	}
+
+	@Override
+	public int update(Person person) {
+		return updateByPrimaryKeySelective(person);
+	}
+
+	@Override
+	public int delete(Integer id) {
+		return deleteByPrimaryKey(id);
+	}
+	
 	private interface PersonMapper<T> extends Mapper<T> {
 
 	}

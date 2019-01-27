@@ -12,8 +12,14 @@ import tk.mybatis.mapper.common.Mapper;
  */
 public abstract class AbstractManagerService<T> extends ProcedureServiceDelegate<T> {
 
+	private Mapper<T> mapper;
+	
 	public AbstractManagerService(Mapper<T> mapper) {
 		super(mapper);
+	}
+
+	public Mapper<T> getMapper() {
+		return mapper;
 	}
 
 }
