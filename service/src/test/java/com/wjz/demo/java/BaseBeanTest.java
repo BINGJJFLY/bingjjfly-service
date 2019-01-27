@@ -50,6 +50,7 @@ public class BaseBeanTest {
 		user3.setName("iss002");
 		user3.setAsset(77.78);
 		user3.setMonth(Month.JANUARY);
+		user3.setSons(null);
 		user3.setAddTime(new Date());
 		
 		System.out.println(user.equals(user));
