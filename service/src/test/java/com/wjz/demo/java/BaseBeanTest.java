@@ -1,5 +1,6 @@
 package com.wjz.demo.java;
 
+import java.time.Month;
 import java.util.Date;
 
 import org.junit.Test;
@@ -48,6 +49,7 @@ public class BaseBeanTest {
 		user3.setId(8);
 		user3.setName("iss002");
 		user3.setAsset(77.78);
+		user3.setMonth(Month.JANUARY);
 		user3.setAddTime(new Date());
 		
 		System.out.println(user.equals(user));
