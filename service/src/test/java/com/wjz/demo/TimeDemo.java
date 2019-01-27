@@ -5,14 +5,15 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.apache.commons.httpclient.util.DateUtil;
+import com.wjz.service.utils.DateUtils;
+
 
 public class TimeDemo {
 	
 	private static final TimeZone ASIA_SHANGHAI = TimeZone.getTimeZone("Asia/Shanghai");
 
 	public static void main(String[] args) {
-		String time = DateUtil.formatDate(new Date(), "yyyy-MM-dd HH:mm:ss");
+		String time = DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss");
 		System.out.println(time);
 		time = formatDate(new Date(), "yyyy-MM-dd HH:mm:ss");
 		System.out.println(time);
