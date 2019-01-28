@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import com.wjz.service.manager.AbstractManagerService;
+import com.wjz.service.pojo.BaseBean;
 import com.wjz.service.redis.RedisOperations;
 import com.wjz.service.redis.RedisValueOperations;
 
@@ -37,7 +38,7 @@ import tk.mybatis.mapper.common.Mapper;
  * @author iss002
  * @param <T>
  */
-public abstract class BaseServiceImpl<T extends Serializable> extends AbstractManagerService<T> {
+public abstract class BaseServiceImpl<T extends BaseBean<T>, M extends Mapper<T>> extends AbstractManagerService<T, M> {
 
 	/**
 	 * <tt>Redis</tt> 缓存器
@@ -54,7 +55,7 @@ public abstract class BaseServiceImpl<T extends Serializable> extends AbstractMa
 	 * 
 	 * @param mapper
 	 */
-	public BaseServiceImpl(Mapper<T> mapper) {
+	public BaseServiceImpl(M mapper) {
 		super(mapper);
 	}
 

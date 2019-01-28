@@ -6,6 +6,8 @@ public interface PersonService {
 	
 	Person selectById(Integer id);
 	
+	Person selectByName(String name);
+	
 	int insert(Person person);
 	
 	int update(Person person);
