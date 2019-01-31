@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.ibatis.reflection.SystemMetaObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cglib.core.ReflectUtils;
@@ -33,6 +34,10 @@ public abstract class AbstractDO2VOMagician implements DO2VOMagician {
 
 	protected MetaObjectManager metaViewManager;
 
+	public AbstractDO2VOMagician(PropertiesHandlerRegistry registy) {
+		this.registy = registy;
+	}
+
 	protected void buildMetaDomainManager(Object domain) {
 		metaDomainManager = new DefaultMetaObjectManager(domain);
 	}
@@ -40,7 +45,7 @@ public abstract class AbstractDO2VOMagician implements DO2VOMagician {
 	protected void buildMetaVeiwManager(Object view) {
 		metaViewManager = new DefaultMetaObjectManager(view);
 	}
-	
+
 	@Override
 	public void setRegisty(PropertiesHandlerRegistry registy) {
 		this.registy = registy;
@@ -60,7 +65,9 @@ public abstract class AbstractDO2VOMagician implements DO2VOMagician {
 										@Override
 										public Object convert(DO2VOMagician magician, Object target)
 												throws UnAssignableException {
-											magician.setRegisty(registy);
+											if (SystemMetaObject.forObject(magician).getValue("registy") == null) {
+												magician.setRegisty(registy);
+											}
 											return magician.do2vo(target);
 										}
 
@@ -87,7 +94,6 @@ public abstract class AbstractDO2VOMagician implements DO2VOMagician {
 					Object view = ReflectUtils.newInstance(viewType);
 					buildMetaVeiwManager(view);
 					doConvert();
-
 					return view;
 				}
 			}

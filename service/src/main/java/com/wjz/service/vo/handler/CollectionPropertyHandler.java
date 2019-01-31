@@ -8,7 +8,6 @@ import org.springframework.util.CollectionUtils;
 
 import com.wjz.service.annotation.ViewProperty;
 import com.wjz.service.vo.magician.DO2VOMagician;
-import com.wjz.service.vo.magician.SingleDO2VOMagician;
 
 /**
  * <b>集合属性处理器</b>
@@ -28,7 +27,7 @@ public abstract class CollectionPropertyHandler<T> extends BasePropertiesHandler
 			if (!CollectionUtils.isEmpty(collection)) {
 				Collection views = initViewCollection(collection.size());
 				Iterator iterator = collection.iterator();
-				final DO2VOMagician magician = new SingleDO2VOMagician();
+				final DO2VOMagician magician = getDO2VOMagician();
 				while (iterator.hasNext()) {
 					Object view = converter.convert(magician, iterator.next());
 					views.add(view);

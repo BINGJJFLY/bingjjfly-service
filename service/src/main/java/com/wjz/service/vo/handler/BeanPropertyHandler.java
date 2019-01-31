@@ -18,7 +18,7 @@ public class BeanPropertyHandler extends BasePropertiesHandler<Object> {
 			MetaObject domainMetaObject, MetaObject viewMetaObject, Converter converter) {
 		if (fieldValue != null) {
 			if (propertyAnno == null || propertyAnno.convertible()) {
-				fieldValue = converter.convert(new SingleDO2VOMagician(), fieldValue);
+				fieldValue = converter.convert(getDO2VOMagician(), fieldValue);
 			}
 			setValue(fieldName, fieldValue, viewMetaObject);
 		}
