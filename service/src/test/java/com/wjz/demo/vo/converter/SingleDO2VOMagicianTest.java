@@ -24,7 +24,7 @@ public class SingleDO2VOMagicianTest {
 
 	private SingleUser user;
 	
-	private SingleDO2VOMagician magician = new SingleDO2VOMagician();
+	private SingleDO2VOMagician magician = new SingleDO2VOMagician(null);
 
 	@Before
 	public void init() {
