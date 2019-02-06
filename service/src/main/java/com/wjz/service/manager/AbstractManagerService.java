@@ -10,16 +10,17 @@ import tk.mybatis.mapper.common.Mapper;
  * @author iss002
  * @param <T>
  */
-public abstract class AbstractManagerService<T> extends ProcedureServiceDelegate<T> {
+public abstract class AbstractManagerService<T, M extends Mapper<T>> extends ProcedureServiceDelegate<T> {
 
-	private Mapper<T> mapper;
-	
-	public AbstractManagerService(Mapper<T> mapper) {
+	protected M mapper;
+
+	public AbstractManagerService(M mapper) {
 		super(mapper);
+		this.mapper = mapper;
 	}
 
-	public Mapper<T> getMapper() {
-		return mapper;
+	public void setMapper(M mapper) {
+		this.mapper = mapper;
 	}
 
 }

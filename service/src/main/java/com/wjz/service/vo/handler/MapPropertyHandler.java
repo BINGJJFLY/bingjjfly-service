@@ -7,7 +7,7 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.util.CollectionUtils;
 
 import com.wjz.service.anno.ViewProperty;
-import com.wjz.service.vo.magician.SingleDO2VOMagician;
+import com.wjz.service.vo.magician.DO2VOMagician;
 
 /**
  * <b>Map类型属性处理器</b>
@@ -24,7 +24,7 @@ public class MapPropertyHandler extends BasePropertiesHandler<Map<Object, Object
 		Map<Object, Object> map = (Map<Object, Object>) getValue(fieldName, domainMetaObject);
 		if (!CollectionUtils.isEmpty(map)) {
 			Map<Object, Object> views = initViewMap(map.size());
-			final SingleDO2VOMagician magician = new SingleDO2VOMagician();
+			final DO2VOMagician magician = getDO2VOMagician();
 			for (Map.Entry<Object, Object> entry : map.entrySet()) {
 				Object view = converter.convert(magician, entry.getValue());
 				views.put(entry.getKey(), view);
