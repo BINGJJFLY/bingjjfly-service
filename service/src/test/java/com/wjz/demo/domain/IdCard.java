@@ -1,7 +1,7 @@
 package com.wjz.demo.domain;
 
 import com.wjz.demo.vo.IdCardVO;
-import com.wjz.service.annotation.ViewObject;
+import com.wjz.service.anno.ViewObject;
 import com.wjz.service.pojo.BaseBean;
 
 @ViewObject(IdCardVO.class)

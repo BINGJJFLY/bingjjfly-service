@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.wjz.demo.vo.SonVO;
-import com.wjz.service.annotation.ViewObject;
-import com.wjz.service.annotation.ViewProperty;
+import com.wjz.service.anno.ViewObject;
+import com.wjz.service.anno.ViewProperty;
 import com.wjz.service.pojo.BaseBean;
 
 @ViewObject(SonVO.class)

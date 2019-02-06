@@ -6,7 +6,7 @@ import java.util.Iterator;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.util.CollectionUtils;
 
-import com.wjz.service.annotation.ViewProperty;
+import com.wjz.service.anno.ViewProperty;
 import com.wjz.service.vo.magician.DO2VOMagician;
 import com.wjz.service.vo.magician.SingleDO2VOMagician;
 

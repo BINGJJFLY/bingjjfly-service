@@ -7,7 +7,7 @@ import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.csource.fastdfs.TrackerServer;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.wjz.service.objectpool.GenericObjectPoolFactory;
+import com.wjz.service.pool.GenericObjectPoolFactory;
 
 /**
  * <b>{@code TrackerServer} 对象池类</b>

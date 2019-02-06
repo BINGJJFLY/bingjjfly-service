@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import org.apache.ibatis.reflection.MetaObject;
 
-import com.wjz.service.annotation.ViewProperty;
+import com.wjz.service.anno.ViewProperty;
 
 public class BigDecimalPropertyHandler extends BasePropertiesHandler<BigDecimal> {
 

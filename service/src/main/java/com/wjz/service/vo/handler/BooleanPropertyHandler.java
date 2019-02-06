@@ -2,7 +2,7 @@ package com.wjz.service.vo.handler;
 
 import org.apache.ibatis.reflection.MetaObject;
 
-import com.wjz.service.annotation.ViewProperty;
+import com.wjz.service.anno.ViewProperty;
 
 /**
  * <b>布尔类型属性处理器</b>

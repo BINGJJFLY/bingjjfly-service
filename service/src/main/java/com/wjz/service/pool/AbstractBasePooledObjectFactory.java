@@ -1,4 +1,4 @@
-package com.wjz.service.objectpool;
+package com.wjz.service.pool;
 
 import org.apache.commons.pool2.BasePooledObjectFactory;
 import org.apache.commons.pool2.PooledObject;

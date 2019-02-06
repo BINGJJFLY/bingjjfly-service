@@ -4,8 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.core.annotation.AnnotationUtils;
 
-import com.wjz.service.annotation.ViewObject;
-import com.wjz.service.annotation.ViewProperty;
+import com.wjz.service.anno.ViewObject;
+import com.wjz.service.anno.ViewProperty;
 import com.wjz.service.pojo.Person;
 
 public class SpringAliasForAnnoDemo {

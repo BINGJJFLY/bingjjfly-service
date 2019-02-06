@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Set;
 
 import com.wjz.demo.vo.SingleUserVO;
-import com.wjz.service.annotation.ViewObject;
-import com.wjz.service.annotation.ViewProperty;
+import com.wjz.service.anno.ViewObject;
+import com.wjz.service.anno.ViewProperty;
 
 @ViewObject(SingleUserVO.class)
 public class SingleUser implements Serializable {

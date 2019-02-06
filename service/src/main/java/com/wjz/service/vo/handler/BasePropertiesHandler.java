@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.StringUtils;
 
-import com.wjz.service.annotation.ViewProperty;
+import com.wjz.service.anno.ViewProperty;
 import com.wjz.service.exception.UnAssignableException;
 
 /**

@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.wjz.demo.vo.UserVO;
-import com.wjz.service.annotation.ViewObject;
-import com.wjz.service.annotation.ViewProperty;
+import com.wjz.service.anno.ViewObject;
+import com.wjz.service.anno.ViewProperty;
 import com.wjz.service.pojo.BaseBean;
 
 @ViewObject(UserVO.class)

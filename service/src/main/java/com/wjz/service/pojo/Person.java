@@ -3,8 +3,8 @@ package com.wjz.service.pojo;
 import java.util.Date;
 import java.util.List;
 
-import com.wjz.service.annotation.ViewObject;
-import com.wjz.service.annotation.ViewProperty;
+import com.wjz.service.anno.ViewObject;
+import com.wjz.service.anno.ViewProperty;
 import com.wjz.service.vo.PersonVO;
 
 @ViewObject(PersonVO.class)

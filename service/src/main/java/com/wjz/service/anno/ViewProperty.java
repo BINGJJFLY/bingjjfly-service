@@ -1,4 +1,4 @@
-package com.wjz.service.annotation;
+package com.wjz.service.anno;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

@@ -13,8 +13,8 @@ import org.apache.ibatis.io.ResolverUtil;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.CollectionUtils;
 
-import com.wjz.service.annotation.PropertyHandler;
-import com.wjz.service.annotation.ViewObject;
+import com.wjz.service.anno.PropertyHandler;
+import com.wjz.service.anno.ViewObject;
 import com.wjz.service.cache.Cache;
 
 /**

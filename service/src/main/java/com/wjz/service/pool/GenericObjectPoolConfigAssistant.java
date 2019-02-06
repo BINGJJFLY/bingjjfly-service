@@ -1,4 +1,4 @@
-package com.wjz.service.objectpool;
+package com.wjz.service.pool;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.slf4j.Logger;

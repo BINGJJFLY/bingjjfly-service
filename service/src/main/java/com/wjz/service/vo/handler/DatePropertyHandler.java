@@ -5,7 +5,7 @@ import java.util.Date;
 import org.apache.ibatis.reflection.MetaObject;
 
 import com.alibaba.dubbo.common.utils.StringUtils;
-import com.wjz.service.annotation.ViewProperty;
+import com.wjz.service.anno.ViewProperty;
 import com.wjz.service.utils.DateUtils;
 
 /**

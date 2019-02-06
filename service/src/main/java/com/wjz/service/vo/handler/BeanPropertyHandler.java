@@ -2,7 +2,7 @@ package com.wjz.service.vo.handler;
 
 import org.apache.ibatis.reflection.MetaObject;
 
-import com.wjz.service.annotation.ViewProperty;
+import com.wjz.service.anno.ViewProperty;
 import com.wjz.service.vo.magician.SingleDO2VOMagician;
 
 /**

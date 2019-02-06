@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cglib.core.ReflectUtils;
 import org.springframework.core.annotation.AnnotationUtils;
 
-import com.wjz.service.annotation.ViewObject;
+import com.wjz.service.anno.ViewObject;
 import com.wjz.service.exception.UnAssignableException;
 import com.wjz.service.vo.handler.Converter;
 import com.wjz.service.vo.handler.PropertiesHandler;
