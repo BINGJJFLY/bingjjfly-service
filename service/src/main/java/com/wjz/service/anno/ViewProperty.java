@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 import org.springframework.core.annotation.AliasFor;
 
 /**
- * <b>Dao层转换视图层属性注解</b>
+ * <b>Domain对象转换View对象属性注解</b>
  * 
  * @author iss002
  *
@@ -20,7 +20,7 @@ import org.springframework.core.annotation.AliasFor;
 public @interface ViewProperty {
 
 	/**
-	 * ViewObject对象属性类型
+	 * View对象属性类型
 	 * 
 	 * @return
 	 */
@@ -28,7 +28,7 @@ public @interface ViewProperty {
 	String value() default "";
 
 	/**
-	 * ViewObject对象属性类型
+	 * View对象属性类型
 	 * 
 	 * @return
 	 */
@@ -36,29 +36,34 @@ public @interface ViewProperty {
 	String name() default "";
 
 	/**
-	 * ViewObject对象属性日期或金额格式
+	 * View对象属性日期或金额格式
 	 * 
 	 * @return
 	 */
 	String pattern() default "";
-	
+
 	/**
-	 * ViewObject对象属性是否进行对称加密
+	 * View对象属性是否进行对称加密
+	 * 
 	 * @return
 	 */
 	boolean crypto() default false;
-	
+
 	/**
-	 * 是否进行转换
+	 * 是否进行赋值
 	 * 
 	 * @return
 	 */
 	boolean working() default true;
-	
+
 	/**
-	 * 是否可转换
+	 * 是否进行转换
+	 * <p>
+	 * 进行赋值但是不进行转换
+	 * </p>
 	 * 
 	 * @return
 	 */
 	boolean convertible() default true;
+
 }

@@ -3,12 +3,11 @@ package com.wjz.service.vo.handler;
 import org.apache.ibatis.reflection.MetaObject;
 
 import com.wjz.service.anno.ViewProperty;
-import com.wjz.service.vo.magician.SingleDO2VOMagician;
 
 /**
  * <b>JavaBean属性处理器</b>
  * 
- * @author 123
+ * @author iss002
  *
  */
 public class BeanPropertyHandler extends BasePropertiesHandler<Object> {
