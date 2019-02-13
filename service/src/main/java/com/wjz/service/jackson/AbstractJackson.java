@@ -7,41 +7,63 @@ import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.wjz.service.exception.ControllerException;
+import com.wjz.service.utils.JacksonUtils;
 
-import com.fasterxml.jackson.core.JsonEncoding;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-
+/**
+ * <b>Json序列化类</b>
+ *
+ * @author iss002
+ *
+ */
 public abstract class AbstractJackson {
 
-	private static final Logger log = LoggerFactory.getLogger(AbstractJackson.class);
-
 	private HttpServletResponse response;
+
+	/**
+	 * 将目标对象转换为Json形式字符串
+	 * 
+	 * @param target
+	 * @return
+	 * @throws ControllerException
+	 */
+	protected String writeValueAsString(Object target) throws ControllerException {
+		try {
+			return JacksonUtils.writeValueAsString(target);
+		} catch (Exception e) {
+			throw new ControllerException(e.getMessage(), e);
+		}
+	}
+
+	/**
+	 * 将目标对象转换为Json形式字符串且过滤 {@code null} 为 {@code ""}
+	 * 
+	 * @param target
+	 * @return
+	 * @throws ControllerException
+	 */
+	protected String writeValueAsStringNotNull(Object target) throws ControllerException {
+		try {
+			return JacksonUtils.writeValueAsStringNotNull(target);
+		} catch (Exception e) {
+			throw new ControllerException(e.getMessage(), e);
+		}
+	}
 
 	/**
 	 * 将目标对象转换为Json形式字符串并输入到输出流中
 	 * 
 	 * @param target
-	 *            目标对象
+	 * @throws ControllerException
 	 */
-	protected void writeJson(Object target) {
+	protected void writeValueAsStream(Object target) throws ControllerException {
 		response.addHeader("Content-Type", APPLICATION_JSON_UTF8_VALUE);
 		OutputStream outputStream = null;
 		try {
 			outputStream = response.getOutputStream();
-			final ObjectMapper objectMapper = new ObjectMapper();
-			JsonGenerator jsonGenerator = objectMapper.getFactory().createGenerator(outputStream, JsonEncoding.UTF8);
-			ObjectWriter objectWriter = objectMapper.writer();
-			objectWriter.writeValue(jsonGenerator, target);
-
-			jsonGenerator.flush();
-			outputStream.flush();
-		} catch (IOException e) {
-			log.error("【将目标对象转换为Json形式字符串并输入到输出流中时异常】", e);
+			JacksonUtils.writeValueAsStream(outputStream, target);
+		} catch (Exception e) {
+			throw new ControllerException(e.getMessage(), e);
 		} finally {
 			if (outputStream != null) {
 				try {
@@ -54,53 +76,20 @@ public abstract class AbstractJackson {
 	}
 
 	/**
-	 * 将目标对象转换为Json形式字节数组并返回
-	 * 
-	 * @param target
-	 *            目标对象
-	 * @return
-	 */
-	protected byte[] returnJsonAsBytes(Object target) {
-		byte[] bytes = null;
-		try {
-			final ObjectMapper objectMapper = new ObjectMapper();
-			bytes = objectMapper.writeValueAsBytes(target);
-		} catch (JsonProcessingException e) {
-			log.error("【将目标对象转换为Json形式字节数组并返回时异常】", e);
-		}
-		return bytes;
-	}
-
-	/**
-	 * 将目标对象转换为Json形式字符串并返回
-	 * 
-	 * @param target
-	 *            目标对象
-	 * @return
-	 */
-	protected String returnJsonAsString(Object target) {
-		byte[] bytes = returnJsonAsBytes(target);
-		return new String(bytes);
-	}
-
-	/**
 	 * 将Json形式字节数组转换为目标类型的对象
 	 * 
 	 * @param bytes
-	 *            字节数组
 	 * @param type
-	 *            目标类型
 	 * @return
+	 * @throws ControllerException
 	 */
-	protected <T> T readJson2Instance(byte[] bytes, Class<T> type) {
-		T instance = null;
+	@SuppressWarnings("unchecked")
+	protected <T> T readValue(byte[] bytes, Class<T> type) throws ControllerException {
 		try {
-			final ObjectMapper objectMapper = new ObjectMapper();
-			instance = objectMapper.readValue(bytes, type);
-		} catch (IOException e) {
-			log.error("【将Json形式字节数组转换为目标类型的对象】", e);
+			return (T) JacksonUtils.readValue(bytes, type);
+		} catch (Exception e) {
+			throw new ControllerException(e.getMessage(), e);
 		}
-		return instance;
 	}
 
 	/**
@@ -109,9 +98,10 @@ public abstract class AbstractJackson {
 	 * @param content
 	 * @param type
 	 * @return
+	 * @throws ControllerException
 	 */
-	protected <T> T readJson2Instance(String content, Class<T> type) {
-		return readJson2Instance(content.getBytes(), type);
+	protected <T> T readValue(String content, Class<T> type) throws ControllerException {
+		return readValue(content.getBytes(), type);
 	}
 
 	public void setResponse(HttpServletResponse response) {
