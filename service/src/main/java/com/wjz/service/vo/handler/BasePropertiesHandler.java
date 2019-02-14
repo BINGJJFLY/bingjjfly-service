@@ -40,6 +40,17 @@ public abstract class BasePropertiesHandler<T> extends CryptoPropertiesHandler<T
 		}
 	}
 
+	/**
+	 * View对象中是否拥有Domain对象中的指定属性
+	 * 
+	 * @param fieldName
+	 * @param viewMetaObject
+	 * @return
+	 */
+	private boolean hasSetter(String fieldName, MetaObject viewMetaObject) {
+		return viewMetaObject.hasSetter(fieldName);
+	}
+
 	@Override
 	public Object getValue(String field, MetaObject domainMetaObject) {
 		return domainMetaObject.getValue(field);
@@ -77,7 +88,7 @@ public abstract class BasePropertiesHandler<T> extends CryptoPropertiesHandler<T
 				working = propertyAnno.working();
 			}
 
-			if (working) {
+			if (working && hasSetter(fieldName, viewMetaObject)) {
 				doHandle(fieldType, fieldName, fieldValue, propertyAnno, domainMetaObject, viewMetaObject, converter);
 			}
 		} catch (Exception e) {

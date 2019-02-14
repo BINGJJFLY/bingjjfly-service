@@ -2,6 +2,7 @@ package com.wjz.service.utils;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Collection;
 import java.util.Iterator;
 
 import org.json.JSONArray;
@@ -57,10 +58,34 @@ public abstract class JacksonUtils {
 	public static String writeValueAsStringNotNull(Object target) throws Exception {
 		String result = writeValueAsString(target);
 		if (result != null) {
+			// 集合或数组
+			if (isPlurality(target)) {
+				final JSONArray jsonArray = new JSONArray(result);
+				result = filterNull(jsonArray).toString();
+			}
 			final JSONObject jsonObject = new JSONObject(result);
 			result = filterNull(jsonObject).toString();
 		}
 		return result;
+	}
+
+	private static boolean isPlurality(Object target) {
+		boolean isCollection = target instanceof Collection || Collection.class.isAssignableFrom(target.getClass());
+		boolean isArray = target.getClass().isArray();
+		boolean isIterator = target instanceof Iterator || Iterator.class.isAssignableFrom(target.getClass());
+		return isCollection || isArray || isIterator;
+	}
+
+	private static JSONArray filterNull(JSONArray jsonArray) {
+		for (int i = 0; i < jsonArray.length(); i++) {
+			Object jsonObj = jsonArray.get(i);
+			if (jsonObj instanceof JSONObject) {
+				filterNull((JSONObject) jsonObj);
+			} else if (jsonObj instanceof JSONArray) {
+				filterNull((JSONArray) jsonObj);
+			}
+		}
+		return jsonArray;
 	}
 
 	private static JSONObject filterNull(JSONObject jsonObject) {
