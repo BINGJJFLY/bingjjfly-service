@@ -149,4 +149,13 @@ public class SingleDO2VOMagicianTest {
 		System.out.println(userCopyVO);
 	}
 	
+	@Test
+	public void nullTest() {
+		List<SingleUserCopyVO> vos = new ArrayList<>();
+		SingleUserCopyVO userCopyVO = (SingleUserCopyVO) magician.do2vo(null, SingleUserCopyVO.class);
+		System.out.println(userCopyVO);
+		vos.add(userCopyVO);
+		System.out.println(vos.size());
+		System.out.println(vos.get(0));
+	}
 }

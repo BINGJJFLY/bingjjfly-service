@@ -26,21 +26,34 @@ public class NumberPropertyHandler<T> extends BasePropertiesHandler<T> {
 			if (fieldValue != null) {
 				try {
 					if (propertyAnno != null) {
-						String pattern = propertyAnno.pattern();
-						if (!StringUtils.isEmpty(pattern)) {
-							fieldValue = new DecimalFormat(pattern).format(fieldValue);
-						}
+						fieldValue = format(propertyAnno.pattern(), fieldValue);
 					} else {
-						fieldValue = String.valueOf(fieldValue);
+						fieldValue = toString(fieldValue);
 					}
 				} catch (Exception e) {
 					String error = "An exception occurs when numeric types are converted to string types. fieldName[{}], fieldValue[{}], domain[{}]";
 					log.error(error, fieldName, fieldValue, domainMetaObject.getOriginalObject(), e);
-					fieldValue = String.valueOf(fieldValue);
+					fieldValue = toString(fieldValue);
 				}
 				setValue(fieldName, fieldValue, viewMetaObject);
 			}
 		}
+	}
+
+	protected String format(String pattern, Object fieldValue) {
+		if (fieldValue != null) {
+			if (!StringUtils.isEmpty(pattern)) {
+				return new DecimalFormat(pattern).format(fieldValue);
+			}
+		}
+		return toString(fieldValue);
+	}
+
+	protected String toString(Object fieldValue) {
+		if (fieldValue != null) {
+			return String.valueOf(fieldValue);
+		}
+		return null;
 	}
 
 }

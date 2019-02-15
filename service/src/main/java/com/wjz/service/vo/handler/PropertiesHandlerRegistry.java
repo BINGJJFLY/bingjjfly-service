@@ -35,8 +35,11 @@ public final class PropertiesHandlerRegistry {
 	 */
 	public PropertiesHandlerRegistry() {
 		registy(Long.class, new LongPropertyHandler());
-		registy(Double.class, new DoublePropertyHandler());
-		registy(Integer.class, new IntegerPropertyHandler());
+		registy(Integer.class, new NumberPropertyHandler<Integer>());
+		registy(Short.class, new NumberPropertyHandler<Short>());
+		registy(Double.class, new NumberPropertyHandler<Double>());
+		registy(Float.class, new NumberPropertyHandler<Float>());
+		registy(Byte.class, new NumberPropertyHandler<Byte>());
 		registy(String.class, new StringPropertyHandler());
 		registy(Date.class, new DatePropertyHandler());
 		registy(List.class, new ListPropertyHandler());
