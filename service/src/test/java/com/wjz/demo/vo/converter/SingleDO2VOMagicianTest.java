@@ -16,6 +16,7 @@ import com.wjz.demo.domain.Address;
 import com.wjz.demo.domain.IdCard;
 import com.wjz.demo.domain.SingleUser;
 import com.wjz.demo.domain.Son;
+import com.wjz.demo.vo.SingleUserCopyVO;
 import com.wjz.demo.vo.SingleUserVO;
 import com.wjz.service.vo.handler.PropertiesHandlerRegistry;
 import com.wjz.service.vo.magician.SingleDO2VOMagician;
@@ -142,4 +143,10 @@ public class SingleDO2VOMagicianTest {
 		System.out.println(userVO.getSonSet());
 	}
 
+	@Test
+	public void array() {
+		SingleUserCopyVO userCopyVO = (SingleUserCopyVO) magician.do2vo(user, SingleUserCopyVO.class);
+		System.out.println(userCopyVO);
+	}
+	
 }

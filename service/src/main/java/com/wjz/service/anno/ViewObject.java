@@ -22,6 +22,6 @@ public @interface ViewObject {
 	 * 
 	 * @return
 	 */
-	Class<?> value();
+	Class<?>[] value();
 
 }

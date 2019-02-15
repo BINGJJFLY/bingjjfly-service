@@ -14,9 +14,4 @@ public class SingleDO2VOMagician extends AbstractDO2VOMagician {
 		super(registy);
 	}
 
-	@Override
-	public Object do2vo(Object domain) {
-		return super.do2vo(domain);
-	}
-	
 }

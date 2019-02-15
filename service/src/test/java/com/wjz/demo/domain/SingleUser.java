@@ -7,11 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.wjz.demo.vo.SingleUserCopyVO;
 import com.wjz.demo.vo.SingleUserVO;
 import com.wjz.service.anno.ViewObject;
 import com.wjz.service.anno.ViewProperty;
 
-@ViewObject(SingleUserVO.class)
+@ViewObject({ SingleUserVO.class, SingleUserCopyVO.class })
 public class SingleUser implements Serializable {
 
 	private static final long serialVersionUID = -168485125484778734L;
@@ -26,31 +27,31 @@ public class SingleUser implements Serializable {
 
 	@ViewProperty(pattern = "0.00")
 	private Double asset;
-	
+
 	private Integer age;
-	
+
 	private List<Son> sons;
-	
+
 	private Son son;
-	
+
 	private IdCard idCard;
-	
+
 	private Map<String, String> stringMap;
-	
+
 	private short s;
-	
+
 	private Set<Son> sonSet;
-	
-	@ViewProperty(convertible=false)
+
+	@ViewProperty(convertible = false)
 	private Son sonNo;
-	
+
 	private BigDecimal salary;
-	
+
 	private Map<String, Address> addresses;
-	
-	@ViewProperty(working=false)
+
+	@ViewProperty(working = false)
 	private Address address;
-	
+
 	public Long getId() {
 		return id;
 	}

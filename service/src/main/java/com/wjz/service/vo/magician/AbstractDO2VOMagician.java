@@ -88,17 +88,24 @@ public abstract class AbstractDO2VOMagician implements DO2VOMagician {
 		if (domain != null) {
 			ViewObject viewObjectAnno = AnnotationUtils.getAnnotation(domain.getClass(), ViewObject.class);
 			if (viewObjectAnno != null) {
-				buildMetaDomainManager(domain);
-				Class<?> viewType = viewObjectAnno.value();
-				if (viewType != null) {
-					Object view = ReflectUtils.newInstance(viewType);
-					buildMetaVeiwManager(view);
-					doConvert();
-					return view;
+				Class<?>[] viewTypes = viewObjectAnno.value();
+				if (!ArrayUtils.isEmpty(viewTypes)) {
+					return do2vo(domain, viewTypes[0]);
 				}
 			}
 		}
 		return domain;
 	}
 
+	@Override
+	public Object do2vo(Object domain, Class<?> viewType) {
+		if (domain != null) {
+			buildMetaDomainManager(domain);
+			Object view = ReflectUtils.newInstance(viewType);
+			buildMetaVeiwManager(view);
+			doConvert();
+			return view;
+		}
+		return domain;
+	}
 }
