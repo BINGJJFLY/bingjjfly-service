@@ -44,13 +44,18 @@ public class SingleDO2VOMagicianTest {
 
 	@Test
 	public void single() {
-		SingleUserVO userVO = (SingleUserVO) magician.do2vo(user);
-		System.out.println(userVO);
-		System.out.println(userVO.getId());
-		System.out.println(userVO.getPersonName());
-		System.out.println(userVO.getAddTime());
-		System.out.println(userVO.getAsset());
-		System.out.println(userVO.getAge());
+		try {
+			SingleUserVO userVO = (SingleUserVO) magician.do2vo(user);
+			System.out.println(userVO);
+			System.out.println(userVO.getId());
+			System.out.println(userVO.getPersonName());
+			System.out.println(userVO.getAddTime());
+			System.out.println(userVO.getAsset());
+			System.out.println(userVO.getAge());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Test

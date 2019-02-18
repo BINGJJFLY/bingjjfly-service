@@ -28,22 +28,14 @@ public abstract class AbstractDO2VOMagician implements DO2VOMagician {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 
-	protected PropertiesHandlerRegistry registy;
-
-	protected MetaObjectManager metaDomainManager;
-
-	protected MetaObjectManager metaViewManager;
+	private PropertiesHandlerRegistry registy;
 
 	public AbstractDO2VOMagician(PropertiesHandlerRegistry registy) {
 		this.registy = registy;
 	}
 
-	protected void buildMetaDomainManager(Object domain) {
-		metaDomainManager = new DefaultMetaObjectManager(domain);
-	}
-
-	protected void buildMetaVeiwManager(Object view) {
-		metaViewManager = new DefaultMetaObjectManager(view);
+	public DefaultMetaObjectManager buildMetaObjectManager(Object target) {
+		return new DefaultMetaObjectManager(target);
 	}
 
 	@Override
@@ -51,7 +43,7 @@ public abstract class AbstractDO2VOMagician implements DO2VOMagician {
 		this.registy = registy;
 	}
 
-	protected void doConvert() {
+	protected void doConvert(MetaObjectManager metaDomainManager, MetaObjectManager metaViewManager) {
 		Field[] fields = metaDomainManager.getDeclaredFields();
 		if (!ArrayUtils.isEmpty(fields)) {
 			for (Field field : fields) {
@@ -100,10 +92,8 @@ public abstract class AbstractDO2VOMagician implements DO2VOMagician {
 	@Override
 	public Object do2vo(Object domain, Class<?> viewType) {
 		if (domain != null) {
-			buildMetaDomainManager(domain);
 			Object view = ReflectUtils.newInstance(viewType);
-			buildMetaVeiwManager(view);
-			doConvert();
+			doConvert(buildMetaObjectManager(domain), buildMetaObjectManager(view));
 			return view;
 		}
 		return domain;

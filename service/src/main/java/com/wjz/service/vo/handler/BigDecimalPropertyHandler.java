@@ -1,5 +1,6 @@
 package com.wjz.service.vo.handler;
 
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 
 import org.apache.ibatis.reflection.MetaObject;
@@ -7,6 +8,10 @@ import org.apache.ibatis.reflection.MetaObject;
 import com.wjz.service.anno.ViewProperty;
 
 public class BigDecimalPropertyHandler extends NumberPropertyHandler<BigDecimal> {
+
+	public BigDecimalPropertyHandler(Type type) {
+		super(type);
+	}
 
 	@Override
 	protected void doHandle(Class<BigDecimal> fieldType, String fieldName, Object fieldValue, ViewProperty propertyAnno,

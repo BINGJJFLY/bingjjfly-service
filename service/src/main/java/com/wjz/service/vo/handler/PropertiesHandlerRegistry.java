@@ -34,12 +34,12 @@ public final class PropertiesHandlerRegistry {
 	 * @see org.apache.ibatis.type.TypeHandlerRegistry TypeHandlerRegistry
 	 */
 	public PropertiesHandlerRegistry() {
-		registy(Long.class, new LongPropertyHandler());
-		registy(Integer.class, new NumberPropertyHandler<Integer>());
-		registy(Short.class, new NumberPropertyHandler<Short>());
-		registy(Double.class, new NumberPropertyHandler<Double>());
-		registy(Float.class, new NumberPropertyHandler<Float>());
-		registy(Byte.class, new NumberPropertyHandler<Byte>());
+		registy(Long.class, new NumberPropertyHandler<Long>(Long.class));
+		registy(Integer.class, new NumberPropertyHandler<Integer>(Integer.class));
+		registy(Short.class, new NumberPropertyHandler<Short>(Short.class));
+		registy(Double.class, new NumberPropertyHandler<Double>(Double.class));
+		registy(Float.class, new NumberPropertyHandler<Float>(Float.class));
+		registy(Byte.class, new NumberPropertyHandler<Byte>(Byte.class));
 		registy(String.class, new StringPropertyHandler());
 		registy(Date.class, new DatePropertyHandler());
 		registy(List.class, new ListPropertyHandler());
@@ -47,9 +47,9 @@ public final class PropertiesHandlerRegistry {
 		registy(ViewObject.class, new BeanPropertyHandler());
 		registy(Boolean.class, new BooleanPropertyHandler());
 		registy(Map.class, new MapPropertyHandler());
-		registy(BigDecimal.class, new BigDecimalPropertyHandler());
+		registy(BigDecimal.class, new BigDecimalPropertyHandler(BigDecimal.class));
 	}
-	
+
 	public void setPackageName(String packageName) {
 		register(packageName);
 	}

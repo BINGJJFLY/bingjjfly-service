@@ -1,5 +1,6 @@
 package com.wjz.service.vo.handler;
 
+import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 
 import org.apache.ibatis.reflection.MetaObject;
@@ -19,6 +20,10 @@ public class NumberPropertyHandler<T> extends BasePropertiesHandler<T> {
 
 	private static final Logger log = LoggerFactory.getLogger(NumberPropertyHandler.class);
 
+	public NumberPropertyHandler(Type type) {
+		setType(type);
+	}
+	
 	@Override
 	protected void doHandle(Class<T> fieldType, String fieldName, Object fieldValue, ViewProperty propertyAnno,
 			MetaObject domainMetaObject, MetaObject viewMetaObject, Converter converter) {

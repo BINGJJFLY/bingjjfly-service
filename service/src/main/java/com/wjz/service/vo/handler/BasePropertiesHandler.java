@@ -1,6 +1,7 @@
 package com.wjz.service.vo.handler;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 import org.apache.ibatis.reflection.MetaObject;
 import org.slf4j.Logger;
@@ -27,7 +28,23 @@ public abstract class BasePropertiesHandler<T> extends CryptoPropertiesHandler<T
 
 	private static final Logger log = LoggerFactory.getLogger(BasePropertiesHandler.class);
 
+	private Type type = getRawType();
 	protected static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
+
+	public BasePropertiesHandler() {
+	}
+
+	public BasePropertiesHandler(Type type) {
+		setType(type);
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
 
 	@Override
 	public void setValue(String field, Object value, MetaObject viewMetaObject) {
@@ -57,7 +74,7 @@ public abstract class BasePropertiesHandler<T> extends CryptoPropertiesHandler<T
 	}
 
 	protected boolean isAssignableFrom(Class<?> classType) {
-		if (((Class<?>) getRawType()).isAssignableFrom(classType)) {
+		if (((Class<?>) getType()).isAssignableFrom(classType)) {
 			return true;
 		}
 		return false;
