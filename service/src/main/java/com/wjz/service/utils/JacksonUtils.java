@@ -62,9 +62,10 @@ public abstract class JacksonUtils {
 			if (isPlurality(target)) {
 				final JSONArray jsonArray = new JSONArray(result);
 				result = filterNull(jsonArray).toString();
+			} else {
+				final JSONObject jsonObject = new JSONObject(result);
+				result = filterNull(jsonObject).toString();
 			}
-			final JSONObject jsonObject = new JSONObject(result);
-			result = filterNull(jsonObject).toString();
 		}
 		return result;
 	}
@@ -78,11 +79,13 @@ public abstract class JacksonUtils {
 
 	private static JSONArray filterNull(JSONArray jsonArray) {
 		for (int i = 0; i < jsonArray.length(); i++) {
-			Object jsonObj = jsonArray.get(i);
-			if (jsonObj instanceof JSONObject) {
-				filterNull((JSONObject) jsonObj);
-			} else if (jsonObj instanceof JSONArray) {
-				filterNull((JSONArray) jsonObj);
+			Object obj = jsonArray.get(i);
+			if (obj instanceof JSONObject) {
+				filterNull((JSONObject) obj);
+			} else if (obj instanceof JSONArray) {
+				filterNull((JSONArray) obj);
+			} else {
+				notNull(i, obj, jsonArray);
 			}
 		}
 		return jsonArray;
@@ -100,15 +103,9 @@ public abstract class JacksonUtils {
 
 	private static void filterNull(String key, Object value, JSONObject jsonObject) {
 		if (value instanceof JSONObject) {
-			filterNull(jsonObject);
+			filterNull((JSONObject) value);
 		} else if (value instanceof JSONArray) {
-			JSONArray jsonArray = (JSONArray) value;
-			for (int i = 0; i < jsonArray.length(); i++) {
-				Object jsonObj = jsonArray.get(i);
-				if (jsonObj instanceof JSONObject) {
-					filterNull((JSONObject) jsonObj);
-				}
-			}
+			filterNull((JSONArray) value);
 		} else {
 			notNull(key, value, jsonObject);
 		}
@@ -117,6 +114,12 @@ public abstract class JacksonUtils {
 	private static void notNull(String key, Object value, JSONObject jsonObject) {
 		if (value == null || value.equals(null) || value instanceof JSONNull) {
 			jsonObject.put(key, "");
+		}
+	}
+	
+	private static void notNull(int index, Object value, JSONArray jsonArray) {
+		if (value == null || value.equals(null) || value instanceof JSONNull) {
+			jsonArray.put(index, "");
 		}
 	}
 
