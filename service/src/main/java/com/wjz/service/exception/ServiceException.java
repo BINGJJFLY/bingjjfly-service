@@ -6,7 +6,7 @@ package com.wjz.service.exception;
  * @author iss002
  *
  */
-public class ServiceException extends RuntimeException {
+public class ServiceException extends ExceptionHolder {
 
 	private static final long serialVersionUID = -7471107603553559221L;
 
@@ -18,12 +18,20 @@ public class ServiceException extends RuntimeException {
 		super(message);
 	}
 
+	public ServiceException(Throwable cause) {
+		super(cause);
+	}
+
 	public ServiceException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
-	public ServiceException(Throwable cause) {
-		super(cause);
+	public ServiceException(String code, String message) {
+		super(code, message);
+	}
+
+	public ServiceException(String code, String message, Throwable cause) {
+		super(code, message, cause);
 	}
 
 }
