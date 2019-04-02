@@ -39,6 +39,8 @@ public class AddTest {
 		// 为数组下标指向元素赋值同上
 		howToGrow(capacity);
 		list.add(6);
+		
+		System.out.println(Runtime.getRuntime().availableProcessors());
 	}
 	
 	private void howToGrow(int oldCapacity) {

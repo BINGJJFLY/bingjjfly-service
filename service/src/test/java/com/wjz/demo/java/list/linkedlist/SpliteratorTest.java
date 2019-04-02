@@ -1,6 +1,6 @@
-package com.wjz.demo.java.list.arraylist;
+package com.wjz.demo.java.list.linkedlist;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Spliterator;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * ArrayList可分割迭代器
+ * LinkedList可分割迭代器
  * 
  * @author iss002
  *
@@ -18,7 +18,7 @@ public class SpliteratorTest {
 
 	@Test
 	public void advance() {
-		ArrayList<Integer> list = new ArrayList<>(10);
+		LinkedList<Integer> list = new LinkedList<>();
 		for (int i = 0; i < 10; i++) {
 			list.add(i);
 		}
@@ -46,7 +46,7 @@ public class SpliteratorTest {
 		}
 	}
 
-	private ArrayList<Integer> list = new ArrayList<>(10);
+	private LinkedList<Integer> list = new LinkedList<>();
 	private volatile Spliterator<Integer> spliter = list.spliterator();
 	private final Object lock = new Object();
 	private AtomicInteger count = new AtomicInteger(0);
