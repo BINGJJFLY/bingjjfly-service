@@ -7,20 +7,20 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionFactoryBean;
 
 import com.wjz.service.manager.ManagerException;
-import com.wjz.service.manager.delete.DefaultDeleteService;
+import com.wjz.service.manager.update.batch.BaseBatchUpdateService;
 
 import tk.mybatis.mapper.common.Mapper;
 
 /**
- * <b>默认的批量删除操作</b>
+ * <b>批量删除操作</b>
  *
  * @author iss002
  *
  * @param <T>
  */
-public class DefaultBatchDeleteService<T> extends DefaultDeleteService<T> implements BatchDeleteService<T> {
+public abstract class BaseBatchDeleteService<T, M extends Mapper<T>> extends BaseBatchUpdateService<T, M> {
 
-	public DefaultBatchDeleteService(Mapper<T> mapper) {
+	public BaseBatchDeleteService(M mapper) {
 		super(mapper);
 	}
 
@@ -39,14 +39,14 @@ public class DefaultBatchDeleteService<T> extends DefaultDeleteService<T> implem
 				while (iterator.hasNext()) {
 					T t = iterator.next();
 					if (t != null) {
-						log.info("【delete a entity [" + getEntityClass().getName() + "]】\r\n" + t.toString());
+						log.info("【delete a entity [" + entityClass.getName() + "]】\r\n" + t.toString());
 						sqlSession.delete(namespace + DELETE_METHOD_NAME, t);
 					}
 				}
 				commit(sqlSession);
 			}
 		} catch (Exception e) {
-			log.error("【Unexpected exception when try to delete some of entity [" + getEntityClass().getName()
+			log.error("【Unexpected exception when try to delete some of entity [" + entityClass.getName()
 					+ "] by batch type】", e);
 			rollback(sqlSession);
 			throw new ManagerException(e);

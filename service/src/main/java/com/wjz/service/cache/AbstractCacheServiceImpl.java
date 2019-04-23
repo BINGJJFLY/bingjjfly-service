@@ -26,7 +26,9 @@ public abstract class AbstractCacheServiceImpl implements CacheService {
 
 	@Override
 	public Object getCache(String key) {
-		return getCacheInstance().get(key);
+		synchronized (this.lock) {
+			return getCacheInstance().get(key);
+		}
 	}
 
 	@Override

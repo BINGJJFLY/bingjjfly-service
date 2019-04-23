@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 
 import com.wjz.service.context.ApplicationContextHolder;
 import com.wjz.service.manager.ManagerException;
+import com.wjz.service.manager.select.page.BaseSelectByPageInfoService;
 
 import tk.mybatis.mapper.common.Mapper;
 
@@ -16,7 +17,7 @@ import tk.mybatis.mapper.common.Mapper;
  *
  * @param <T>
  */
-public abstract class BatchAssistant<T> extends MapperAssistant<T> {
+public abstract class BatchAssistant<T, M extends Mapper<T>> extends BaseSelectByPageInfoService<T, M> {
 
 	public static final String INSERT_METHOD_NAME = ".insertSelective";
 	public static final String UPDATE_METHOD_NAME = ".updateByPrimaryKeySelective";
@@ -27,7 +28,7 @@ public abstract class BatchAssistant<T> extends MapperAssistant<T> {
 	private SqlSessionFactoryBean sqlSessionFactory;
 	private String namespace;
 
-	public BatchAssistant(Mapper<T> mapper) {
+	public BatchAssistant(M mapper) {
 		super(mapper);
 	}
 
@@ -81,7 +82,7 @@ public abstract class BatchAssistant<T> extends MapperAssistant<T> {
 	public String getNamespace() {
 		synchronized (lock) {
 			if (namespace == null) {
-				namespace = getMapper().getClass().getName();
+				namespace = mapper.getClass().getName();
 			}
 		}
 		return namespace;

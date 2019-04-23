@@ -7,20 +7,20 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionFactoryBean;
 
 import com.wjz.service.manager.ManagerException;
-import com.wjz.service.manager.update.DefaultUpdateService;
+import com.wjz.service.manager.assistant.BatchAssistant;
 
 import tk.mybatis.mapper.common.Mapper;
 
 /**
- * <b>默认的批量更新操作</b>
+ * <b>批量更新操作</b>
  *
  * @author iss002
  *
  * @param <T>
  */
-public class DefaultBatchUpdateService<T> extends DefaultUpdateService<T> implements BatchUpdateService<T> {
+public abstract class BaseBatchUpdateService<T, M extends Mapper<T>> extends BatchAssistant<T, M> {
 
-	public DefaultBatchUpdateService(Mapper<T> mapper) {
+	public BaseBatchUpdateService(M mapper) {
 		super(mapper);
 	}
 
@@ -39,14 +39,14 @@ public class DefaultBatchUpdateService<T> extends DefaultUpdateService<T> implem
 				while (iterator.hasNext()) {
 					T t = iterator.next();
 					if (t != null) {
-						log.info("【update a entity [" + getEntityClass().getName() + "]】\r\n" + t.toString());
+						log.info("【update a entity [" + entityClass.getName() + "]】\r\n" + t.toString());
 						sqlSession.update(namespace + UPDATE_METHOD_NAME, t);
 					}
 				}
 				commit(sqlSession);
 			}
 		} catch (Exception e) {
-			log.error("【Unexpected exception when try to update some of entity [" + getEntityClass().getName()
+			log.error("【Unexpected exception when try to update some of entity [" + entityClass.getName()
 					+ "] by batch type】", e);
 			rollback(sqlSession);
 			throw new ManagerException(e);
