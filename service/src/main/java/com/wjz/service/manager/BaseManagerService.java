@@ -3,7 +3,6 @@ package com.wjz.service.manager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.wjz.service.cache.AbstractCacheServiceImpl;
 import com.wjz.service.utils.ReflectUtils;
 
 import tk.mybatis.mapper.common.Mapper;
@@ -14,8 +13,7 @@ import tk.mybatis.mapper.common.Mapper;
  * @author iss002
  * @param <T>
  */
-public abstract class BaseManagerService<T, M extends Mapper<T>> extends AbstractCacheServiceImpl
-		implements ManagerService<T> {
+public abstract class BaseManagerService<T, M extends Mapper<T>> implements ManagerService<T> {
 
 	protected M mapper;
 	protected final Class<T> entityClass;

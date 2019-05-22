@@ -1,15 +1,11 @@
 package com.wjz.service.impl;
 
-import java.io.Serializable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.RedisOperations;
 
 import com.wjz.service.manager.procedure.BaseProcedureService;
 import com.wjz.service.pojo.BaseBean;
-import com.wjz.service.redis.RedisOperations;
-import com.wjz.service.redis.RedisValueOperations;
 
 import tk.mybatis.mapper.common.Mapper;
 
@@ -41,11 +37,6 @@ import tk.mybatis.mapper.common.Mapper;
 public abstract class BaseServiceImpl<T extends BaseBean<T>, M extends Mapper<T>> extends BaseProcedureService<T, M> {
 
 	/**
-	 * <tt>Redis</tt> 缓存器
-	 */
-	protected RedisOperations<? extends Serializable, ?> redisOperations;
-
-	/**
 	 * 通用日志
 	 */
 	protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -57,11 +48,6 @@ public abstract class BaseServiceImpl<T extends BaseBean<T>, M extends Mapper<T>
 	 */
 	public BaseServiceImpl(M mapper) {
 		super(mapper);
-	}
-
-	@SuppressWarnings("unchecked")
-	public void setRedisTemplate(RedisTemplate<? extends Serializable, ?> redisTemplate) {
-		redisOperations = new RedisValueOperations((RedisTemplate<String, String>) redisTemplate);
 	}
 
 }

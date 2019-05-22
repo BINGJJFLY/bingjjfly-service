@@ -21,7 +21,6 @@ import org.apache.shiro.io.SerializationException;
  * @see {@link org.springframework.core.serializer.DefaultSerializer spring.DefaultSerializer}
  *
  */
-@Deprecated
 public abstract class SerializingUtils {
 
 	public static final int BYTE_ARRAY_OUTPUT_STREAM_SIZE = 128;
