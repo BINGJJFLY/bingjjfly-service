@@ -8,8 +8,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.ibatis.type.TypeException;
-import org.apache.ibatis.type.TypeReference;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.ReflectionUtils.FieldCallback;
 import org.springframework.util.ReflectionUtils.MethodCallback;
@@ -28,19 +26,17 @@ public abstract class ReflectUtils {
 	 * @param clazz
 	 * @return
 	 */
-	public static Type getSuperclassTypeParameter(Class<?> clazz) {
-		Type genericSuperclass = clazz.getGenericSuperclass();
-		if (genericSuperclass instanceof Class) {
-			if (TypeReference.class != genericSuperclass) {
-				return getSuperclassTypeParameter(clazz.getSuperclass());
-			}
-			throw new TypeException("'" + clazz + "' misses the type parameter. " + "Add a type parameter to it.");
-		}
-		Type rawType = ((ParameterizedType) genericSuperclass).getActualTypeArguments()[0];
+	public static Type getSingleTypeParameter(Class<?> clazz) {
+		Type rawType = getTypeParameter(clazz)[0];
 		if (rawType instanceof ParameterizedType) {
 			rawType = ((ParameterizedType) rawType).getRawType();
 		}
 		return rawType;
+	}
+
+	public static Type[] getTypeParameter(Class<?> clazz) {
+		Type genericSuperclass = clazz.getGenericSuperclass();
+		return ((ParameterizedType) genericSuperclass).getActualTypeArguments();
 	}
 
 	/**

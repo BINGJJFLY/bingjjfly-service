@@ -22,7 +22,7 @@ public abstract class BaseManagerService<T, M extends Mapper<T>> implements Mana
 	@SuppressWarnings("unchecked")
 	public BaseManagerService(M mapper) {
 		this.mapper = mapper;
-		this.entityClass = (Class<T>) ReflectUtils.getSuperclassTypeParameter(getClass());
+		this.entityClass = (Class<T>) ReflectUtils.getSingleTypeParameter(getClass());
 	}
 
 	public void setMapper(M mapper) {
