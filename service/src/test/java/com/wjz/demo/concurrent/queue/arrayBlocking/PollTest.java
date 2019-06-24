@@ -15,6 +15,8 @@ public class PollTest {
 		// 返回null或者是数组的元素
 		Assert.assertEquals(null, queue.poll());
 		queue.offer("hello");
+		queue.offer("world");
+		queue.offer("bing");
 		Assert.assertEquals("hello", queue.poll());
 	}
 
