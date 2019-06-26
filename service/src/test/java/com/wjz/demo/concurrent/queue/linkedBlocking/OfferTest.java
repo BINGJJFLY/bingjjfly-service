@@ -40,7 +40,7 @@ public class OfferTest {
             putLock.unlock();
         }
         if (c == 0)
-        	$* 加获取锁，唤醒不为空锁条件的等待线程 *$
+        	$* 加获取锁，唤醒不为空锁条件的等待线程（队列已空，但是刚刚添加了一个节点） *$
             signalNotEmpty();
         return c >= 0;
     }

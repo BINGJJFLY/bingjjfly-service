@@ -42,6 +42,11 @@ public class ConstructorTest {
 		c.add("hello");
 		c.add("world");
 		LinkedBlockingQueue<String> queue = new LinkedBlockingQueue<>(c);
+		
+		for (String item : queue) {
+			
+		}
+		
 	}
 	
 	/*

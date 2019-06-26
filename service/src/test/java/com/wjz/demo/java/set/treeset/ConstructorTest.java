@@ -1,8 +1,11 @@
 package com.wjz.demo.java.set.treeset;
 
+import java.util.Comparator;
 import java.util.TreeSet;
 
 import org.junit.Test;
+
+import com.wjz.demo.Person;
 
 /**
  * LinkedHashSet和TreeSet的区别： 
@@ -26,4 +29,37 @@ public class ConstructorTest {
 		set.forEach((e) -> System.out.println(e));
 	}
 
+	@Test
+	public void comparator() {
+		TreeSet<Person> set = new TreeSet<>(new PersonComparator());
+		Person p1 = new Person();
+		p1.setId(7);
+		Person p2 = new Person();
+		p2.setId(2);
+		Person p3 = new Person();
+		p3.setId(5);
+		Person p4 = new Person();
+		p4.setId(4);
+		set.add(p1);
+		set.add(p2);
+		set.add(p3);
+		set.add(p4);
+		
+		set.forEach((e) -> System.out.println(e.getId()));
+	}
+	
+	class PersonComparator implements Comparator<Person> {
+
+		@Override
+		public int compare(Person o1, Person o2) {
+			int i = o1.getId() - o2.getId();
+			if (i > 0) {
+				return 1;
+			} else if (i == 0) {
+				return 0;
+			} 
+			return -1;
+		}
+
+	}
 }
