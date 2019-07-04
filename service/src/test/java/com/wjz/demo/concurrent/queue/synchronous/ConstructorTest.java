@@ -4,6 +4,12 @@ import java.util.concurrent.SynchronousQueue;
 
 import org.junit.Test;
 
+/**
+ * 不存储元素的阻塞队列（添加元素、获取元素无锁操作），每个put必须等待一个take，反之亦然
+ *
+ * @author iss002
+ *
+ */
 public class ConstructorTest {
 	
 	@Test
