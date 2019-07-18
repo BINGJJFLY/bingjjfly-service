@@ -416,6 +416,11 @@
 			<artifactId>fastdfs-client-java</artifactId>
 			<version>${fastdfs.client.version}</version>
 		</dependency>
+		<dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>28.0-jre</version>
+		</dependency>
 	</dependencies>
 
 	<build>

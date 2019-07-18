@@ -2,8 +2,11 @@ package com.wjz.demo.concurrent.threadpool;
 
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.SynchronousQueue;
@@ -191,6 +194,40 @@ public class ThreadPoolExecutorTest {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void submit() {
+		ThreadPoolExecutor pool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
+				threadFactory, handler);
+		Future<String> future = pool.submit(new ThrowTask());
+		try {
+			String result = future.get();
+			System.out.println(result);
+		} catch (InterruptedException | ExecutionException e) {
+			e.printStackTrace();
+		}
+		future = pool.submit(new Task2());
+		try {
+			String result = future.get();
+			System.out.println(result);
+		} catch (InterruptedException | ExecutionException e) {
+			e.printStackTrace();
+		}
+		Future<?> future2 = pool.submit(new Task());
+		try {
+			Object result = future2.get();
+			System.out.println(result);
+		} catch (InterruptedException | ExecutionException e) {
+			e.printStackTrace();
+		}
+		future = pool.submit(new ErrorTask());
+		try {
+			String result = future.get();
+			System.out.println(result);
+		} catch (InterruptedException | ExecutionException e) {
+			//e.printStackTrace();
+		}
+	}
 
 	static class Task implements Runnable {
 
@@ -204,6 +241,49 @@ public class ThreadPoolExecutorTest {
 			}
 		}
 
+	}
+	
+	class Task2 implements Callable<String> {
+
+		@Override
+		public String call() throws Exception {
+			return "hello";
+		}
+		
+	}
+	
+	class ThrowTask implements Callable<String> {
+
+		@Override
+		public String call() throws Exception {
+			try {
+				int i = 1;
+				if (i == 1) {
+					throw new RuntimeException();
+				}
+				return "success";
+			} catch (Exception e) {
+				return "error";
+			}
+		}
+		
+	}
+	
+	class ErrorTask implements Callable<String> {
+
+		@Override
+		public String call() throws Exception {
+			try {
+				int i = 1;
+				if (i == 1) {
+					throw new RuntimeException();
+				}
+				return "success";
+			} catch (Exception e) {
+				throw e;
+			}
+		}
+		
 	}
 
 }
