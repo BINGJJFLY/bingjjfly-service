@@ -62,6 +62,8 @@ public abstract class BatchAssistant<T, M extends Mapper<T>> extends BaseSelectB
 
 	public void commit(SqlSession sqlSession) {
 		if (sqlSession != null) {
+			// 并非事务提交（java.sql.Connection.commit();）
+			// 执行批处理操作（java.sql.Statment.executeBatch();）
 			sqlSession.commit();
 			sqlSession.clearCache();
 		}
@@ -69,6 +71,7 @@ public abstract class BatchAssistant<T, M extends Mapper<T>> extends BaseSelectB
 
 	public void rollback(SqlSession sqlSession) {
 		if (sqlSession != null) {
+			// 并非事务回滚（java.sql.Connection.rollback();）
 			sqlSession.rollback();
 		}
 	}

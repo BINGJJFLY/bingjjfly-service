@@ -40,6 +40,7 @@ public abstract class BaseBatchInsertService<T, M extends Mapper<T>> extends Bas
 					T t = iterator.next();
 					if (t != null) {
 						log.info("【insert a new entity [" + entityClass.getName() + "]】\r\n" + t.toString());
+						// 添加批处理（java.sql.PreparedStatment.addBatch();）
 						sqlSession.insert(namespace + INSERT_METHOD_NAME, t);
 					}
 				}
