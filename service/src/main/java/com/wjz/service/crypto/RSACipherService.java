@@ -15,13 +15,15 @@ import java.security.spec.EncodedKeySpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 
-import org.apache.shiro.codec.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,7 +53,12 @@ public class RSACipherService {
 	 */
 	private final static String KEY_RSA_PRIVATEKEY = "RSAPrivateKey";
 
+	private static Encoder encoder = null;
+	private static Decoder decoder = null;
+	
 	public static Map<String, Object> init() {
+		encoder = Base64.getEncoder();
+		decoder = Base64.getDecoder();
 		Map<String, Object> map = null;
 		try {
 			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(KEY_RSA);
@@ -245,7 +252,7 @@ public class RSACipherService {
 	 * @return
 	 */
 	private String BASE64ecode(byte[] sign) {
-		return Base64.encodeToString(sign);
+		return encoder.encodeToString(sign);
 	}
 
 	/**
@@ -256,7 +263,7 @@ public class RSACipherService {
 	 * @throws IOException
 	 */
 	private byte[] BASE64decode(String data) throws IOException {
-		return Base64.decode(data);
+		return decoder.decode(data);
 	}
 
 }
