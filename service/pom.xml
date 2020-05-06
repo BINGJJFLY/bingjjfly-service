@@ -48,9 +48,21 @@
 		<mongodb.driver.version>3.8.2</mongodb.driver.version>
 		<flume.version>1.8.0</flume.version>
 		<servlet.version>2.5</servlet.version>
+		<jfinal.version>4.8</jfinal.version>
+		<jfinal-cos.version>2020.4</jfinal-cos.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+                <groupId>com.jfinal</groupId>
+                <artifactId>jfinal</artifactId>
+                <version>${jfinal.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jfinal</groupId>
+                <artifactId>cos</artifactId>
+                <version>${jfinal-cos.version}</version>
+            </dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
