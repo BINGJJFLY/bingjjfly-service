@@ -23,7 +23,7 @@
 		<mapper.version>3.3.9</mapper.version>
 		<jpa.version>1.0.0.Final</jpa.version>
 		<validation.version>1.0.0.GA</validation.version>
-		<hibernate.validator.version>4.0.2.GA</hibernate.validator.version>
+		<hibernate.validator.version>5.3.5.Final</hibernate.validator.version>
 		<jackson.version>2.6.4</jackson.version>
 		<shiro.version>1.4.0</shiro.version>
 		<json.version>20160810</json.version>
