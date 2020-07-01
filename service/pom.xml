@@ -29,7 +29,7 @@
 		<json.version>20160810</json.version>
 		<json.lib.version>2.4</json.lib.version>
 		<redis.version>2.9.0</redis.version>
-		<quartz.version>2.3.0</quartz.version>
+		<quartz.version>2.3.2</quartz.version>
 		<kafka.version>2.0.0.RELEASE</kafka.version>
 		<dom4j.version>1.6.1</dom4j.version>
 		<mysql.driver.version>5.1.38</mysql.driver.version>
