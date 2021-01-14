@@ -19,7 +19,7 @@
 		<jstl.version>1.2</jstl.version>
 		<oracle.driver.version>7</oracle.driver.version>
 		<pagehelper.version>4.1.6</pagehelper.version>
-		<poi.version>3.9</poi.version>
+		<poi.version>4.1.2</poi.version>
 		<mapper.version>3.3.9</mapper.version>
 		<jpa.version>1.0.0.Final</jpa.version>
 		<validation.version>1.0.0.GA</validation.version>
