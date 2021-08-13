@@ -48,7 +48,7 @@
 		<mongodb.driver.version>3.8.2</mongodb.driver.version>
 		<flume.version>1.8.0</flume.version>
 		<servlet.version>2.5</servlet.version>
-		<jfinal.version>4.8</jfinal.version>
+		<jfinal.version>4.9.11</jfinal.version>
 		<jfinal-cos.version>2020.4</jfinal-cos.version>
 	</properties>
 
